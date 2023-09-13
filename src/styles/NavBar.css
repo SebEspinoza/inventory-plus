@@ -1,0 +1,62 @@
+/* Container 1 */
+.container-nav {
+  position: absolute;
+  top: 0px;
+  left: 238px;
+  width: 1665px;
+  height: 76px;
+  background: #241200ff;
+  border-radius: 0px;
+}
+
+/* Textbox 1 */
+.textbox {
+  position: absolute;
+  top: 16px;
+  left: 32px;
+  opacity: 1;
+}
+.textbox input {
+  width: 445px;
+  height: 44px;
+  padding-left: 44px;
+  padding-right: 16px;
+  font-family: Manrope;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  background: #512800ff;
+  border-radius: 4px;
+  border-width: 0px;
+  outline: none;
+}
+.textbox svg {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 20px;
+  height: 20px;
+  fill: #fff0c9ff;
+}
+.textbox svg.left {
+  left: 16px;
+}
+/* hover */
+.textbox input:hover {
+  color: #fff0c9ff;
+  background: #512800ff;
+}
+/* focused */
+.textbox input:focused {
+  color: #fff0c9ff;
+  background: #512800ff;
+}
+/* disabled */
+.textbox input:disabled {
+  color: #fff0c9ff;
+  background: #512800ff;
+}
+.textbox :disabled + .icon,
+.textbox :disabled + .icon + .icon {
+  fill: #fff0c9ff;
+}
