@@ -2,8 +2,8 @@
 .container-nav {
   position: absolute;
   top: 0px;
-  left: 238px;
-  width: 1665px;
+  left: 220px;
+  width: 1683px;
   height: 76px;
   background: #241200ff;
   border-radius: 0px;
@@ -30,9 +30,12 @@
   border-width: 0px;
   outline: none;
 }
+.textbox input::placeholder {
+  color: #fff0c9ff;
+}
 .textbox svg {
   position: absolute;
-  top: 16px;
+  top: 13px;
   right: 16px;
   width: 20px;
   height: 20px;
