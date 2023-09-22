@@ -1,19 +1,18 @@
 import React from "react";
-import SideBar from "../components/SideBar";
+import Sidebar from "../components/SideBar";
 import Header from "../components/Header";
+import Productos from "../components/Productos";
 
-import VistaGeneral from "../components/VistaGeneral";
-
-const Home = () => {
+const Inventario = () => {
   return (
     <div>
-      <SideBar />
+      <Sidebar />
       <div className="flex flex-col h-screen w-full pl-20 lg:pl-[238px]">
         <Header />
-        <VistaGeneral />
+        <Productos />
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Inventario;
