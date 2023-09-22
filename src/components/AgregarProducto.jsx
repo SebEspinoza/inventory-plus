@@ -64,6 +64,7 @@ const AgregarProducto = (props) => {
             id="quantity"
             name="quantity"
             onChange={handleChange}
+            required
           />
 
           <label htmlFor="price" className="text-[18px]">
@@ -74,6 +75,7 @@ const AgregarProducto = (props) => {
             id="price"
             name="price"
             onChange={handleChange}
+            required
           />
           <label htmlFor="category" className="text-[18px]">
             Categoria :
@@ -83,6 +85,7 @@ const AgregarProducto = (props) => {
             id="category"
             name="category"
             onChange={handleChange}
+            required
           />
           <label htmlFor="date_of_expiry" className="text-[18px]">
             Fecha :
@@ -92,12 +95,19 @@ const AgregarProducto = (props) => {
             id="date_of_expiry"
             name="date_of_expiry"
             onChange={handleChange}
+            required
           />
 
           <label htmlFor="img" className="text-[18px]">
             Link Imagen :
           </label>
-          <input type="text" id="img" name="img" onChange={handleChange} />
+          <input
+            type="text"
+            id="img"
+            name="img"
+            onChange={handleChange}
+            required
+          />
 
           <button
             className="btn bg-info-600 border-none text-white text-[18px] rounded-[5px]
