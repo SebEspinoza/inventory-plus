@@ -5,18 +5,28 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import AgregarProducto from "./AgregarProducto";
 import EditarProducto from "./EditarProducto";
 
+axios.defaults.baseURL = "https://inventoryplus.cyclic.app/products";
+
 const Productos = () => {
-  const url = "https://inventoryplus.cyclic.app/products";
   const [products, setProducts] = useState([]);
   const [visibleForm, setVisibleForm] = useState(false);
   const [visibleEdit, setVisibleEdit] = useState(false);
+  const [formDataEdit, setFormDataEdit] = useState({
+    _id: "",
+    name: "",
+    quantity: 0,
+    price: 0,
+    category: "",
+    img: "",
+    date_of_expiry: null,
+  });
 
   useEffect(() => {
     getProducts();
   }, []);
 
   const getProducts = async () => {
-    const respuesta = await axios.get(url);
+    const respuesta = await axios.get("");
     setProducts(respuesta.data);
   };
 
@@ -32,16 +42,18 @@ const Productos = () => {
 
   const handleProductoAgregado = () => {
     getProducts();
-    toggleSeccion();
+    toggleSeccion(1);
   };
 
-  const handleProductoEditado = () => {
-    console.log(products);
-    toggleSeccion();
+  const handleProductoEditado = (product) => {
+    setFormDataEdit(product);
+    getProducts();
+    toggleSeccion(2);
   };
 
-  const handleProductoEliminado = (id) => {
-    console.log(id);
+  const handleProductoEliminado = async (id) => {
+    await axios.delete("/" + id);
+    getProducts();
   };
 
   return (
@@ -77,6 +89,7 @@ const Productos = () => {
             <EditarProducto
               onClose={() => toggleSeccion(2)}
               onProductoEditado={handleProductoEditado}
+              rest={formDataEdit}
             />
           </div>
         )}
@@ -122,7 +135,9 @@ const Productos = () => {
                         <td className="align-middle text-center">
                           <button
                             className="bg-warning text-black px-3 py-1 rounded-[10px] mr-1 ml-1"
-                            onClick={() => toggleSeccion(2)}
+                            onClick={() => {
+                              handleProductoEditado(product);
+                            }}
                           >
                             <FaEdit />
                           </button>

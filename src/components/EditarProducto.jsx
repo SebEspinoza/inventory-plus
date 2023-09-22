@@ -7,12 +7,13 @@ axios.defaults.baseURL = "https://inventoryplus.cyclic.app/products";
 const EditarProducto = (props) => {
   const [visibleForm, setVisibleForm] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    quantity: 0,
-    price: 0,
-    category: "",
-    img: "",
-    date_of_expiry: null,
+    _id: props.rest._id || "",
+    name: props.rest.name || "",
+    quantity: props.rest.quantity || 0,
+    price: props.rest.price || 0,
+    category: props.rest.category || "",
+    img: props.rest.img || "",
+    date_of_expiry: props.rest.date_of_expiry || null,
   });
 
   const handleChange = (e) => {
@@ -25,11 +26,10 @@ const EditarProducto = (props) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault();
-    const data = await axios.post("", formData);
+    const data = await axios.put("/" + props.rest._id, formData);
     console.log(data);
-
     props.onProductoEditado();
   };
 
@@ -42,7 +42,7 @@ const EditarProducto = (props) => {
       {/*Agregar Items */}
       <div className="text-color-cafe-oscuro flex justify-center items-center absolute top-0 left-0 w-[100%] h-[100%]">
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleEdit}
           className="w-[420px] bg-color-crema flex flex-col px-[50px] py-[30px] shadow-lg rounded-[20px]"
         >
           <div className="close-btn ml-auto text-[28px]  flex justify-center items-center rounded-[20px] cursor-pointer text-danger-600">
@@ -54,7 +54,13 @@ const EditarProducto = (props) => {
           <label htmlFor="name" className="text-[18px]">
             Nombre :
           </label>
-          <input type="text" id="name" name="name" onChange={handleChange} />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            onChange={handleChange}
+            value={formData.name}
+          />
 
           <label htmlFor="quantity" className="text-[18px]">
             Cantidad :
@@ -64,6 +70,7 @@ const EditarProducto = (props) => {
             id="quantity"
             name="quantity"
             onChange={handleChange}
+            value={formData.quantity}
           />
 
           <label htmlFor="price" className="text-[18px]">
@@ -74,6 +81,7 @@ const EditarProducto = (props) => {
             id="price"
             name="price"
             onChange={handleChange}
+            value={formData.price}
           />
           <label htmlFor="category" className="text-[18px]">
             Categoria :
@@ -83,12 +91,19 @@ const EditarProducto = (props) => {
             id="category"
             name="category"
             onChange={handleChange}
+            value={formData.category}
           />
 
           <label htmlFor="img" className="text-[18px]">
             Link Imagen :
           </label>
-          <input type="text" id="img" name="img" onChange={handleChange} />
+          <input
+            type="text"
+            id="img"
+            name="img"
+            onChange={handleChange}
+            value={formData.img}
+          />
 
           <button
             className="btn bg-info-600 border-none text-white text-[18px] rounded-[5px]

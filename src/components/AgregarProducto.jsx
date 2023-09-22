@@ -33,7 +33,7 @@ const AgregarProducto = (props) => {
     props.onProductoAgregado();
   };
 
-  const buttonHandler = () => {
+  const closeButtonHandler = () => {
     props.onClose(!visibleForm);
   };
 
@@ -46,7 +46,7 @@ const AgregarProducto = (props) => {
           className="w-[420px] bg-color-crema flex flex-col px-[50px] py-[30px] shadow-lg rounded-[20px]"
         >
           <div className="close-btn ml-auto text-[28px]  flex justify-center items-center rounded-[20px] cursor-pointer text-danger-600">
-            <RiCloseCircleLine onClick={buttonHandler} />
+            <RiCloseCircleLine onClick={closeButtonHandler} />
           </div>
           <h2 className="text-center text-[24px] font-bold mb-4">
             Agregar Producto
