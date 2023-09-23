@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { BiSearchAlt, BiUserCircle } from "react-icons/bi";
 import { FaRegBell } from "react-icons/fa";
-import { BsQuestionLg } from "react-icons/bs";
 
 const Header = () => {
   const [buscar, setBuscar] = useState("");
@@ -27,9 +26,6 @@ const Header = () => {
         <ul className="flex items-center gap-[10px]">
           <li>
             <FaRegBell className="fill-color-crema w-[20px] md:w-[24px] h-[20px] md:h-[24px] cursor-pointer" />
-          </li>
-          <li>
-            <BsQuestionLg className="fill-color-crema w-[20px] md:w-[24px] h-[20px] md:h-[24px] cursor-pointer" />
           </li>
           <li>
             <BiUserCircle className="fill-color-crema w-[20px] md:w-[36px] h-[20px] md:h-[36px] cursor-pointer" />
