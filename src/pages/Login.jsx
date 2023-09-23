@@ -5,7 +5,7 @@ import "../styles/Login.css";
 const Login = () => {
   return (
     <div className="body bg-color-crema">
-      <div className="container bg-color-crema">
+      <div className="containerLogin bg-color-crema">
         <form>
           <div className="form-icon rounded-full w-[100px] overflow-hidden flex items-center justify-center">
             <BiSolidUser className="w-16 h16 fill-color-cafe-claro" />

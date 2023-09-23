@@ -5,7 +5,7 @@
   height: 100vh;
   font-family: "Russo One", sans-serif;
 }
-.container {
+.containerLogin {
   padding: 30px;
   border-radius: 20px;
   width: 350px;
@@ -30,7 +30,7 @@
   margin-bottom: 20px;
 }
 
-.container .form-control {
+.containerLogin .form-control {
   color: #472400;
   background: #ecf0f3;
   font-size: 15px;
