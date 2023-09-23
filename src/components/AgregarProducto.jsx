@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://inventoryplus.cyclic.app/products";
+const url = "https://inventoryplus.cyclic.app/products";
 
 const AgregarProducto = (props) => {
   const [visibleForm, setVisibleForm] = useState(false);
@@ -27,7 +27,7 @@ const AgregarProducto = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await axios.post("", formData);
+    const data = await axios.post(url, formData);
     console.log(data);
 
     props.onProductoAgregado();

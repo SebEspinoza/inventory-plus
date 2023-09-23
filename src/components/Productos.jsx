@@ -5,7 +5,7 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import AgregarProducto from "./AgregarProducto";
 import EditarProducto from "./EditarProducto";
 
-axios.defaults.baseURL = "https://inventoryplus.cyclic.app/products";
+const url = "https://inventoryplus.cyclic.app/products";
 
 const Productos = () => {
   const [products, setProducts] = useState([]);
@@ -26,7 +26,7 @@ const Productos = () => {
   }, []);
 
   const getProducts = async () => {
-    const respuesta = await axios.get("");
+    const respuesta = await axios.get(url);
     setProducts(respuesta.data);
   };
 
@@ -52,7 +52,7 @@ const Productos = () => {
   };
 
   const handleProductoEliminado = async (id) => {
-    await axios.delete("/" + id);
+    await axios.delete(url + "/" + id);
     getProducts();
   };
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://inventoryplus.cyclic.app/products";
+const url = "https://inventoryplus.cyclic.app/products";
 
 const EditarProducto = (props) => {
   const [visibleForm, setVisibleForm] = useState(false);
@@ -28,7 +28,7 @@ const EditarProducto = (props) => {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    const data = await axios.put("/" + props.rest._id, formData);
+    const data = await axios.put(url + "/" + props.rest._id, formData);
     console.log(data);
     props.onProductoEditado();
   };
