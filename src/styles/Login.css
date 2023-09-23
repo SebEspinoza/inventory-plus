@@ -13,7 +13,6 @@
 }
 
 .form-icon {
-  color: #ac40ab;
   font-size: 100px;
   line-height: 100px;
   margin: 0 auto 15px;
@@ -21,7 +20,6 @@
 }
 
 .title {
-  color: #ac40ab;
   font-size: 25px;
   font-weight: 700;
   text-transform: uppercase;
@@ -33,7 +31,7 @@
 }
 
 .container .form-control {
-  color: #333;
+  color: #472400;
   background: #ecf0f3;
   font-size: 15px;
   height: 50px;
@@ -49,14 +47,12 @@
   outline: none;
 }
 ::placeholder {
-  color: #808080;
-  font-size: 16px;
+  color: #472400;
+  font-size: 14px;
   font-weight: bold;
 }
 
 .btn {
-  color: #ac40ab;
-  background: #ecf0f3;
   font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
@@ -64,11 +60,11 @@
   padding: 12px 15px 11px;
   border-radius: 20px;
   border: none;
-  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px #fff;
+  box-shadow: 6px 6px 6px #472400, -6px -6px 6px #d8c8bc;
   transition: all 0.5s ease 0s;
   margin: 25px 0 20px;
   cursor: pointer;
 }
 .btn:hover {
-  color: orange;
+  color: #ffd15e;
 }
