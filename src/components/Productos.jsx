@@ -4,6 +4,7 @@ import { RiAddCircleFill } from "react-icons/ri";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import AgregarProducto from "./AgregarProducto";
 import EditarProducto from "./EditarProducto";
+import "../styles/Productos.css";
 
 const url = "https://inventoryplus.cyclic.app/products";
 
@@ -58,16 +59,13 @@ const Productos = () => {
 
   return (
     <div className="App">
-      <div className="container-fluid">
+      <div className="container-fluid ">
         {/*Boton agregar */}
         <div className="container mx-auto">
           <div className="mt-3">
             <div className="md:col-span-4 md:col-start-5">
               <div className="grid place-items-center">
-                <button
-                  className="bg-color-cafe-claro text-color-crema px-4 py-2 rounded-full"
-                  onClick={() => toggleSeccion(1)}
-                >
+                <button className="btnAgregarProd bg-color-cafe-claro text-color-crema px-4 py-2 rounded-full" onClick={() => toggleSeccion(1)}>
                   <RiAddCircleFill className="mr-1" /> Agregar Productos
                 </button>
               </div>
@@ -77,28 +75,21 @@ const Productos = () => {
         {/*Form agregar productos */}
         {visibleForm && (
           <div className="">
-            <AgregarProducto
-              onClose={() => toggleSeccion(1)}
-              onProductoAgregado={handleProductoAgregado}
-            />
+            <AgregarProducto onClose={() => toggleSeccion(1)} onProductoAgregado={handleProductoAgregado} />
           </div>
         )}
         {/*Form editar productos */}
         {visibleEdit && (
           <div className="">
-            <EditarProducto
-              onClose={() => toggleSeccion(2)}
-              onProductoEditado={handleProductoEditado}
-              rest={formDataEdit}
-            />
+            <EditarProducto onClose={() => toggleSeccion(2)} onProductoEditado={handleProductoEditado} rest={formDataEdit} />
           </div>
         )}
         {/*Tabla Productos */}
         {products && (
           <div className="mt-3">
             <div className="lg:col-span-8 lg:col-start-3">
-              <div className="overflow-x-auto">
-                <table className="table-auto border mx-auto">
+              <div>
+                <table className="tabla-productos table-auto  mx-auto bg-color-crema">
                   <thead>
                     <tr>
                       <th className="px-4 py-2 border-r">#</th>
@@ -117,20 +108,11 @@ const Productos = () => {
                         <td className="border-r">{i + 1}</td>
                         <td className="border-r">{product.name}</td>
                         <td className="border-r">{product.quantity}</td>
-                        <td className="border-r">
-                          $
-                          {new Intl.NumberFormat("es-cl").format(product.price)}
-                        </td>
+                        <td className="border-r">${new Intl.NumberFormat("es-cl").format(product.price)}</td>
                         <td className="border-r">{product.category}</td>
+                        <td className="border-r">{product.date_of_expiry.toString().split("T")[0]}</td>
                         <td className="border-r">
-                          {product.date_of_expiry.toString().split("T")[0]}
-                        </td>
-                        <td className="border-r">
-                          <img
-                            src={product.img}
-                            alt={product.name}
-                            className="h-12 w-12 object-cover mx-auto"
-                          />
+                          <img src={product.img} alt={product.name} className="h-12 w-12 object-cover mx-auto my-1" />
                         </td>
                         <td className="align-middle text-center">
                           <button

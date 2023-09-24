@@ -41,16 +41,11 @@ const AgregarProducto = (props) => {
     <div className="fixed inset-0 flex items-center justify-center backdrop-blur-md backdrop-filter">
       {/*Agregar Items */}
       <div className="text-color-cafe-oscuro flex justify-center items-center absolute top-0 left-0 w-[100%] h-[100%]">
-        <form
-          onSubmit={handleSubmit}
-          className="w-[420px] bg-color-crema flex flex-col px-[50px] py-[30px] shadow-lg rounded-[20px]"
-        >
+        <form onSubmit={handleSubmit} className="w-[420px] bg-color-crema flex flex-col px-[50px] py-[30px] shadow-lg rounded-[20px]">
           <div className="close-btn ml-auto text-[28px]  flex justify-center items-center rounded-[20px] cursor-pointer text-danger-600">
             <RiCloseCircleLine onClick={closeButtonHandler} />
           </div>
-          <h2 className="text-center text-[24px] font-bold mb-4">
-            Agregar Producto
-          </h2>
+          <h2 className="text-center text-[24px] font-bold mb-4">Agregar Producto</h2>
           <label htmlFor="name" className="text-[18px]">
             Nombre :
           </label>
@@ -59,55 +54,25 @@ const AgregarProducto = (props) => {
           <label htmlFor="quantity" className="text-[18px]">
             Cantidad :
           </label>
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            onChange={handleChange}
-            required
-          />
+          <input type="number" id="quantity" name="quantity" onChange={handleChange} required />
 
           <label htmlFor="price" className="text-[18px]">
             Precio :
           </label>
-          <input
-            type="number"
-            id="price"
-            name="price"
-            onChange={handleChange}
-            required
-          />
+          <input type="number" id="price" name="price" onChange={handleChange} required />
           <label htmlFor="category" className="text-[18px]">
             Categoria :
           </label>
-          <input
-            type="text"
-            id="category"
-            name="category"
-            onChange={handleChange}
-            required
-          />
+          <input type="text" id="category" name="category" onChange={handleChange} required />
           <label htmlFor="date_of_expiry" className="text-[18px]">
             Fecha :
           </label>
-          <input
-            type="date"
-            id="date_of_expiry"
-            name="date_of_expiry"
-            onChange={handleChange}
-            required
-          />
+          <input type="date" id="date_of_expiry" name="date_of_expiry" onChange={handleChange} required />
 
           <label htmlFor="img" className="text-[18px]">
             Link Imagen :
           </label>
-          <input
-            type="text"
-            id="img"
-            name="img"
-            onChange={handleChange}
-            required
-          />
+          <input type="text" id="img" name="img" onChange={handleChange} required />
 
           <button
             className="btn bg-info-600 border-none text-white text-[18px] rounded-[5px]

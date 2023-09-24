@@ -8,12 +8,8 @@ const VistaGeneral = () => {
       <div className="contenido bg-[#f3f4f6ff] flex-grow p-4">
         <div className="parteSuperior flex flex-row items-center justify-between">
           <div className="texto flex flex-row items-center mt-[32px] ml-[36px]">
-            <h1 className="font-heading font-bold text-[32px] leading-[48px] text-color-cafe-oscuro">
-              Vista General
-            </h1>
-            <h3 className="font-body ml-[15px] font-normal text-[14px] leading-[22px] opacity-1 text-color-cafe-claro">
-              Hoy: Sept 15, 2023
-            </h3>
+            <h1 className="font-heading font-bold text-[32px] leading-[48px] text-color-cafe-oscuro">Vista General</h1>
+            <h3 className="font-body ml-[15px] font-normal text-[14px] leading-[22px] opacity-1 text-color-cafe-claro">Hoy: Sept 15, 2023</h3>
           </div>
 
           <div className="dropdown items-baseline cursor-pointer">

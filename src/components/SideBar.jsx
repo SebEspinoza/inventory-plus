@@ -16,18 +16,14 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="bg-color-crema h-screen w-20 lg:w-[238px] fixed shadow-xs">
+    <div className="bg-color-crema h-screen w-20 lg:w-[238px] fixed shadow-xl">
       <div className="container-top flex">
         <div className="logo flex mt-[24px] ml-[24px] mr-[16px]">
           <img src={Logo} alt="Logo" className="w-[48px] h-[48px]" />
         </div>
         <div className="empresa flex-col">
-          <h1 className="mt-[24px] w-[143px] h-[26px] font-heading text-[16px] font-bold leading-[26px] text-color-cafe-oscuro">
-            Nombre Empresa
-          </h1>
-          <h4 className="mt-[2px] font-body text-[12px] font-normal leading-[20px] text-[#56566cff]">
-            Categoria
-          </h4>
+          <h1 className="mt-[24px] w-[143px] h-[26px] font-heading text-[16px] font-bold leading-[26px] text-color-cafe-oscuro">Nombre Empresa</h1>
+          <h4 className="mt-[2px] font-body text-[12px] font-normal leading-[20px] text-[#56566cff]">Categoria</h4>
         </div>
       </div>
       <div className="menu mt-[55px] ml-[9px] mr-[33px] flex flex-col font-body font-normal text-[14px] leading-[22px] opacity-1 w-[196px] h-[220px]">

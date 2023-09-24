@@ -1,0 +1,21 @@
+.tabla-productos {
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 14px 14px 20px #ffd15e, -14px -14px 20px #f3e9cf;
+}
+
+.btnAgregarProd {
+  font-weight: bold;
+  text-transform: uppercase;
+
+  padding: 12px 15px 11px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 6px 6px 6px #472400, -6px -6px 6px #d8c8bc;
+  transition: all 0.5s ease 0s;
+  margin: 25px 0 20px;
+  cursor: pointer;
+}
+.btnAgregarProd:hover {
+  color: #ffd15e;
+}
