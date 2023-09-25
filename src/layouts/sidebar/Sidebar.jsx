@@ -84,7 +84,7 @@ const Sidebar = () => {
         {/*Logo */}
         <div className="flex items-center gap-3 font-medium border-b border-slate-300 py-3 mx-3">
           <img src={Logo} alt=".." width={45} />
-          <span className="text-xl whitespace-pre">Uno Cafe</span>
+          <span className="text-xl whitespace-pre font-Russo">Uno Cafe</span>
         </div>
 
         {/*Menu */}
@@ -140,7 +140,7 @@ const Sidebar = () => {
                   <p>Nombre Usuario</p>
                   <small>Tipo de Usuario</small>
                 </div>
-                <p className="text-color-crema py-1.5 px-3 text-xs bg-color-cafe-claro rounded-xl">Cerrar Sesión</p>
+                <button className="text-color-crema py-1.5 px-3 text-xs bg-rojizo rounded-xl">Cerrar Sesión</button>
               </div>
             </div>
           )}

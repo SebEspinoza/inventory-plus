@@ -8,10 +8,10 @@ const Home = () => {
       <div className="flex-grow p-4">
         <div className="parteSuperior flex lg:flex-row flex-col items-center justify-between mt-5">
           <div className="textoSuperior flex lg:flex-row  flex-col items-center">
-            <h1 className="font-heading font-bold lg:text-[32px] lg:leading-[48px] text-[32px] leading-[30px] text-center text-color-cafe-oscuro">
+            <h1 className="font-OpenSans font-bold lg:text-[32px] lg:leading-[48px] text-[32px] leading-[30px] text-center text-color-cafe-oscuro">
               Vista General
             </h1>
-            <h3 className="font-body lg:ml-[15px] font-normal lg:text-[14px] lg:leading-[22px] text-sm opacity-1 text-color-cafe-claro">
+            <h3 className="font-Manrope lg:ml-[15px] font-normal lg:text-[14px] lg:leading-[22px] text-sm opacity-1 text-color-cafe-claro">
               Hoy: Sept 15, 2023
             </h3>
           </div>
@@ -23,8 +23,8 @@ const Home = () => {
             <select
               name="periodo"
               id="periodo"
-              className="w-32  text-[12px] leading-5 lg:w-[179px] lg:h-[36px] lg:px-[25px] font-body lg:text-[14px] font-normal lg:leading-[22px]
-               text-color-crema bg-color-cafe-claro rounded-sm border-0 cursor-pointer appearance-none text-center lg:text-start lg:ml-1"
+              className="w-32  text-[12px] leading-5 lg:w-[179px] lg:h-[36px] lg:px-[25px] font-Manrope lg:text-[14px] font-normal lg:leading-[22px]
+               text-color-crema bg-rojizo rounded-sm border-0 cursor-pointer appearance-none text-center lg:text-start lg:ml-1"
             >
               <option value="">Mes anterior </option>
               <option value="">Ultimos 3 meses</option>

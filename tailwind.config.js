@@ -5,6 +5,7 @@ module.exports = {
     colors: {
       white: "#FFFFFF",
       black: "#000000",
+      transparent: "transparent",
       primary: {
         100: "#f4f4fb",
         150: "#e5e4f6",
@@ -186,23 +187,6 @@ module.exports = {
         DEFAULT: "#ff2b91",
       },
       "color-crema": {
-        100: "#fff9eb",
-        150: "#fff8e6",
-        200: "#fff7e2",
-        250: "#fff5dd",
-        300: "#fff4d9",
-        350: "#fff3d4",
-        400: "#fff2d0",
-        450: "#fff0cb",
-        500: "#fff0c9",
-        550: "#ffe092",
-        600: "#ffd15e",
-        650: "#ffc229",
-        700: "#f4af00",
-        750: "#c08900",
-        800: "#8b6400",
-        850: "#573e00",
-        900: "#221800",
         DEFAULT: "#fff0c9",
       },
       "color-cafe-oscuro": {
@@ -245,8 +229,19 @@ module.exports = {
         900: "#291400",
         DEFAULT: "#512800",
       },
+      mocha: {
+        DEFAULT: "#bb9457",
+      },
+      rojizo: {
+        DEFAULT: "#6f1d1b",
+      },
     },
     extend: {
+      fontFamily: {
+        OpenSans: "Open Sans",
+        Manrope: "Manrope",
+        Russo: "Russo One",
+      },
       boxShadow: {
         neumorphicBar: "7px 7px 10px #ffd15e, -7px -7px 10px #f3e9cf",
         neumorphicButton: "inset 6px 6px 6px #251200, inset -6px -6px 6px #422100",

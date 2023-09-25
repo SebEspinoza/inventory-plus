@@ -5,7 +5,7 @@ import Analytics from "./pages/Analytics";
 import Trabajadores from "./pages/Trabajadores";
 import Build from "./pages/Build";
 import Settings from "./pages/Settings";
-import Inventario from "./pages/Inventario";
+import Inventario from "./pages/Inventario/Inventario";
 
 const App = () => {
   return (

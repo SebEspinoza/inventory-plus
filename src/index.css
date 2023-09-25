@@ -18,3 +18,8 @@
 .active {
   @apply bg-color-cafe-claro text-color-crema shadow-neumorphicButton;
 }
+
+.download-btn {
+  @apply bg-rojizo hover:bg-color-crema hover:text-color-cafe-oscuro fill-color-crema hover:fill-rojizo px-4 py-2 
+  flex text-color-crema items-center gap-2 rounded;
+}
