@@ -4,10 +4,11 @@ import axios from "axios";
 import { createColumnHelper, getCoreRowModel, useReactTable, flexRender, getPaginationRowModel, getFilteredRowModel } from "@tanstack/react-table";
 // React Icons
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { IoIosAddCircle, IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BiSearchAlt } from "react-icons/bi";
 import BotonDescargar from "./BotonDescargar";
 import InputBuscar from "./InputBuscar";
+import BotonAgregar from "./BotonAgregar";
 
 //url API
 const url = "https://inventoryplus.cyclic.app/products";
@@ -15,6 +16,8 @@ const url = "https://inventoryplus.cyclic.app/products";
 const TablaProductos = () => {
   const columnHelper = createColumnHelper();
   const [products, setProducts] = useState([]);
+  const [visibleForm, setVisibleForm] = useState(false);
+  const [visibleEdit, setVisibleEdit] = useState(false);
   const [data, setData] = useState([]);
   const [globalFilter, setGlobalFilter] = useState("");
   const fechaActual = new Date();
@@ -89,6 +92,21 @@ const TablaProductos = () => {
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const toggleSeccion = (type) => {
+    if (type === 1) {
+      setVisibleForm(!visibleForm);
+    }
+
+    if (type === 2) {
+      setVisibleEdit(!visibleEdit);
+    }
+  };
+
+  const handleProductoAgregado = () => {
+    getProducts();
+    toggleSeccion(1);
+  };
+
   return (
     <div>
       <div className="p-2 mx-auto  text-color-crema fill-color-cafe-oscuro">
@@ -102,8 +120,12 @@ const TablaProductos = () => {
               placeholder="Buscar..."
             />
           </div>
-
-          <BotonDescargar data={data} fileName={`Stock ${fechaActual.toLocaleString()}`} />
+          <button className="download-btn" onClick={() => toggleSeccion(1)}>
+            <IoIosAddCircle />
+            Agregar
+          </button>
+          {/* Form Agregar */}
+          {visibleForm && <BotonAgregar onClose={() => toggleSeccion(1)} onProductoAgregado={handleProductoAgregado} />}
         </div>
         {/*Tabla */}
         <table className="border border-color-cafe-oscuro w-full text-left">
@@ -136,66 +158,71 @@ const TablaProductos = () => {
             )}
           </tbody>
         </table>
-        {/*Paginacion*/}
-        <div className="flex items-start justify-end mt-2 gap-2">
-          {/*Botones para cambiar de pagina */}
-          <button
-            onClick={() => {
-              table.previousPage();
-            }}
-            disabled={!table.getCanPreviousPage()}
-            className="p-1 border border-color-cafe-claro px-2 disabled:opacity-30"
-          >
-            {<IoIosArrowBack />}
-          </button>
-          <button
-            onClick={() => {
-              table.nextPage();
-            }}
-            disabled={!table.getCanNextPage()}
-            className="p-1 border border-color-cafe-claro px-2 disabled:opacity-30"
-          >
-            {<IoIosArrowForward />}
-          </button>
-          {/*Numero de pagina */}
-          <span className="flex items-center gap-1">
-            <div>Página</div>
-            <strong>
-              {table.getState().pagination.pageIndex + 1} de {""}
-              {table.getPageCount()}
-            </strong>
-          </span>
-          {/*Ir a una pagina en especifico */}
-          <span className="flex items-start gap-1">
-            - Ir a la página:
-            <input
-              type="number"
-              onWheel={(e) => {
-                e.preventDefault();
+        <div className="flex flex-row justify-between mt-2">
+          <div className="flex items-start justify-start ">
+            <BotonDescargar data={data} fileName={`Stock ${fechaActual.toLocaleString()}`} />
+          </div>
+          {/*Paginacion*/}
+          <div className="flex items-start justify-end gap-2">
+            {/*Botones para cambiar de pagina */}
+            <button
+              onClick={() => {
+                table.previousPage();
               }}
-              onChange={(e) => {
-                const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                table.setPageIndex(page);
+              disabled={!table.getCanPreviousPage()}
+              className="p-1 border border-color-cafe-claro px-2 disabled:opacity-30"
+            >
+              {<IoIosArrowBack />}
+            </button>
+            <button
+              onClick={() => {
+                table.nextPage();
               }}
-              defaultValue={table.getState().pagination.pageIndex + 1}
-              className="border p-1 rounded bg-transparent w-14 h-6 
+              disabled={!table.getCanNextPage()}
+              className="p-1 border border-color-cafe-claro px-2 disabled:opacity-30"
+            >
+              {<IoIosArrowForward />}
+            </button>
+            {/*Numero de pagina */}
+            <span className="flex items-center gap-1">
+              <div>Página</div>
+              <strong>
+                {table.getState().pagination.pageIndex + 1} de {""}
+                {table.getPageCount()}
+              </strong>
+            </span>
+            {/*Ir a una pagina en especifico */}
+            <span className="flex items-start gap-1">
+              - Ir a la página:
+              <input
+                type="number"
+                onWheel={(e) => {
+                  e.preventDefault();
+                }}
+                onChange={(e) => {
+                  const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                  table.setPageIndex(page);
+                }}
+                defaultValue={table.getState().pagination.pageIndex + 1}
+                className="border p-1 rounded bg-transparent w-14 h-6 
               [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-            />
-          </span>
-          {/*Mostrar N productos */}
-          <select
-            value={table.getState().pagination.pageSize}
-            onChange={(e) => {
-              table.setPageSize(Number(e.target.value));
-            }}
-            className="p-[2px] bg-color-cafe-claro border-none text-color-crema w-25 h-6 text-sm"
-          >
-            {[10, 20, 30, 50].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
-                Mostrar {pageSize}
-              </option>
-            ))}
-          </select>
+              />
+            </span>
+            {/*Mostrar N productos */}
+            <select
+              value={table.getState().pagination.pageSize}
+              onChange={(e) => {
+                table.setPageSize(Number(e.target.value));
+              }}
+              className="p-[2px] bg-color-cafe-claro border-none text-color-crema w-25 h-6 text-sm"
+            >
+              {[10, 20, 30, 50].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  Mostrar {pageSize}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
     </div>
