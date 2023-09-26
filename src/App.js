@@ -10,7 +10,7 @@ import Login from "./pages/Login";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/inventory-plus">
       <RootLayout>
         <Routes>
           <Route path="/" element={<Home />} />
