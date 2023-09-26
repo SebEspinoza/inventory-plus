@@ -26,7 +26,7 @@ const SubMenu = ({ data }) => {
           <li key={menu}>
             {/* /build/auth
                 /build/hosting */}
-            <NavLink className="link !bg-transparent capitalize" to={`/${data.name}/${menu}`}>
+            <NavLink className="link capitalize" to={`/${data.name}/${menu}`}>
               {menu}
             </NavLink>
           </li>

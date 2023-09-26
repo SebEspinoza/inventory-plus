@@ -8,7 +8,9 @@ import { IoIosAddCircle, IoIosArrowBack, IoIosArrowForward } from "react-icons/i
 import { BiSearchAlt } from "react-icons/bi";
 import BotonDescargar from "./BotonDescargar";
 import InputBuscar from "./InputBuscar";
+//componentes
 import BotonAgregar from "./BotonAgregar";
+import FormEditar from "./FormEditar";
 
 //url API
 const url = "https://inventoryplus.cyclic.app/products";
@@ -19,6 +21,15 @@ const TablaProductos = () => {
   const [visibleForm, setVisibleForm] = useState(false);
   const [visibleEdit, setVisibleEdit] = useState(false);
   const [data, setData] = useState([]);
+  const [formDataEdit, setFormDataEdit] = useState({
+    _id: "",
+    name: "",
+    quantity: 0,
+    price: 0,
+    category: "",
+    img: "",
+    date_of_expiry: null,
+  });
   const [globalFilter, setGlobalFilter] = useState("");
   const fechaActual = new Date();
 
@@ -67,12 +78,22 @@ const TablaProductos = () => {
       header: "Fecha de caducidad",
     }),
     columnHelper.accessor("botones", {
-      cell: () => (
+      cell: (info) => (
         <div>
-          <button className="bg-warning text-black px-3 py-1 rounded-[10px] mr-1 ml-1">
+          <button
+            className="bg-warning text-black px-3 py-1 rounded-[10px] mr-1 ml-1"
+            onClick={() => {
+              handleProductoEditado(info.row.original);
+            }}
+          >
             <FaEdit />
           </button>
-          <button className="bg-danger text-white px-3 py-1 rounded-[10px] mr-1 ml-1">
+          <button
+            className="bg-danger text-white px-3 py-1 rounded-[10px] mr-1 ml-1"
+            onClick={() => {
+              handleProductoEliminado(info.row.original._id);
+            }}
+          >
             <FaTrashAlt />
           </button>
         </div>
@@ -107,6 +128,17 @@ const TablaProductos = () => {
     toggleSeccion(1);
   };
 
+  const handleProductoEditado = (product) => {
+    setFormDataEdit(product);
+    getProducts();
+    toggleSeccion(2);
+  };
+
+  const handleProductoEliminado = async (id) => {
+    await axios.delete(url + "/" + id);
+    getProducts();
+  };
+
   return (
     <div>
       <div className="p-2 mx-auto  text-color-crema fill-color-cafe-oscuro">
@@ -126,6 +158,8 @@ const TablaProductos = () => {
           </button>
           {/* Form Agregar */}
           {visibleForm && <BotonAgregar onClose={() => toggleSeccion(1)} onProductoAgregado={handleProductoAgregado} />}
+          {/* Form Editar */}
+          {visibleEdit && <FormEditar onClose={() => toggleSeccion(2)} onProductoEditado={handleProductoEditado} rest={formDataEdit} />}
         </div>
         {/*Tabla */}
         <table className="border border-color-cafe-oscuro w-full text-left">

@@ -6,6 +6,7 @@ import Trabajadores from "./pages/Trabajadores";
 import Build from "./pages/Build";
 import Settings from "./pages/Settings";
 import Inventario from "./pages/Inventario/Inventario";
+import Login from "./pages/Login";
 
 const App = () => {
   return (
@@ -18,6 +19,8 @@ const App = () => {
           <Route path="/settings" element={<Settings />} />
           <Route path="/build/:bID" element={<Build />} />
           <Route path="/analytics/:aID" element={<Analytics />} />
+
+          <Route path="/login" element={<Login />} />
         </Routes>
       </RootLayout>
     </BrowserRouter>

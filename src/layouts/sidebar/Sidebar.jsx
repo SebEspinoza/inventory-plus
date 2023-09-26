@@ -1,6 +1,6 @@
 // React imports
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 // Extra imports
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
@@ -14,6 +14,7 @@ import { BsPerson, BsBoxSeam } from "react-icons/bs";
 import { TbReportAnalytics } from "react-icons/tb";
 import { RiBuilding3Line } from "react-icons/ri";
 import Logo from "../../assets/Logo.png";
+// Auth
 
 const Sidebar = () => {
   // Estado del sidebar
@@ -67,6 +68,12 @@ const Sidebar = () => {
       menus: ["dashboard", "realtime", "events"],
     },
   ];
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/login");
+  };
 
   return (
     <div className="h-full sticky top-0 z-10 pr-10 lg:pr-0">
@@ -140,7 +147,9 @@ const Sidebar = () => {
                   <p>Nombre Usuario</p>
                   <small>Tipo de Usuario</small>
                 </div>
-                <button className="text-color-crema py-1.5 px-3 text-xs bg-rojizo rounded-xl">Cerrar Sesión</button>
+                <button className="text-color-crema py-1.5 px-3 text-xs bg-rojizo rounded-xl" onClick={handleLogout}>
+                  Cerrar Sesión
+                </button>
               </div>
             </div>
           )}

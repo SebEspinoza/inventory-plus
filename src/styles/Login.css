@@ -1,0 +1,71 @@
+.body {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  font-family: "Russo One", sans-serif;
+}
+
+.containerLogin {
+  padding: 30px;
+  border-radius: 20px;
+  width: 350px;
+  box-shadow: 14px 14px 20px #ffd15e, -14px -14px 20px #f3e9cf;
+}
+
+.form-icon {
+  font-size: 100px;
+  line-height: 100px;
+  margin: 0 auto 15px;
+  box-shadow: 7px 7px 10px #ffd15e, -7px -7px 10px #f3e9cf;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.containerLogin .form-control {
+  color: #472400;
+  background: #ecf0f3;
+  font-size: 15px;
+  height: 50px;
+  padding: 20px;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 50px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
+  display: inline-block;
+  transition: all 0.3s ease 0s;
+  width: 100%;
+  margin: 0 0 25px;
+  outline: none;
+}
+::placeholder {
+  color: #472400;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.btn {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 100%;
+  padding: 12px 15px 11px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 6px 6px 6px #472400, -6px -6px 6px #d8c8bc;
+  transition: all 0.5s ease 0s;
+  margin: 25px 0 20px;
+  cursor: pointer;
+}
+.btn:hover {
+  color: #ffd15e;
+}
