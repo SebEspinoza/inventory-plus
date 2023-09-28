@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { BiSolidUser } from "react-icons/bi";
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";
 import "../styles/Login.css";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import storage from "../Storage/storage";
 
 const url = "https://inventoryplus.cyclic.app/auth/login"; // URL de inicio de sesión
 
@@ -12,9 +12,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const { login } = useAuth();
-  const [loginSuccess, setLoginSuccess] = useState(false);
-
+  const go = useNavigate();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const handleInputChange = (e) => {
@@ -37,21 +35,21 @@ const Login = () => {
         email: formData.email,
         password: formData.password,
       });
-
+      // Datos correctos
       if (response.data.success === true) {
-        login(response);
-        setLoginSuccess(true);
+        const authToken = response.data.token;
+        storage.set("authUser", response.data.data);
+        storage.set("authToken", authToken);
+        go("/");
+        // Datos incorrectos
       } else if (response.data.success === false) {
         alert("Los datos son incorrectos");
       }
     } catch (error) {
+      console.log("Datos erroneos");
       console.error("Error al iniciar sesión: ", error);
     }
   };
-
-  if (loginSuccess) {
-    return <Navigate to="/" />;
-  }
 
   return (
     <div className="body bg-color-crema">

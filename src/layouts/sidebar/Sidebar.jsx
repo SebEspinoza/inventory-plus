@@ -6,19 +6,20 @@ import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 // Componentes
 import SubMenu from "./SubMenu";
+import storage from "../../Storage/storage";
 // React icons
 import { IoIosArrowBack } from "react-icons/io";
 import { SlSettings } from "react-icons/sl";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { BsPerson, BsBoxSeam } from "react-icons/bs";
 import { TbReportAnalytics } from "react-icons/tb";
-import { RiBuilding3Line } from "react-icons/ri";
 import Logo from "../../assets/Logo.png";
 // Auth
 
 const Sidebar = () => {
   // Estado del sidebar
   const [isOpen, setIsOpen] = useState(true);
+  const go = useNavigate();
 
   let isTab = useMediaQuery({
     query: "(max-width:768px)",
@@ -56,23 +57,16 @@ const Sidebar = () => {
 
   const subMenusList = [
     {
-      // Menu principal (app, settings, etc...)
-      name: "build",
-      icon: RiBuilding3Line,
-      // Submenus
-      menus: ["auth", "app settings", "storage", "hosting"],
-    },
-    {
-      name: "analytics",
+      name: "Estadísticas",
       icon: TbReportAnalytics,
-      menus: ["dashboard", "realtime", "events"],
+      menus: ["Dashboard", "Estimaciones"],
     },
   ];
 
-  const navigate = useNavigate();
-
   const handleLogout = () => {
-    navigate("/login");
+    storage.remove("authUser");
+    storage.remove("authToken");
+    go("/login");
   };
 
   return (
@@ -98,7 +92,7 @@ const Sidebar = () => {
         <div className="flex flex-col h-full">
           {/*Primero */}
           <ul
-            className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1 font-medium overflow-x-hidden scrollbar-thin
+            className="whitespace-pre px-2.5 text-[1.2rem] py-5 flex flex-col gap-1 font-medium overflow-x-hidden scrollbar-thin
            scrollbar-track-white scrollbar-thumb-slate-100 h-[70%] md:h-[68%]"
           >
             <li>
@@ -141,8 +135,8 @@ const Sidebar = () => {
           </ul>
           {/*Segundo */}
           {isOpen && (
-            <div className="flex-1 text-sm z-50 max-h-48 my-auto whitespace-pre w-full font-medium">
-              <div className="flex items-center justify-between border-y border-slate-300 p-4">
+            <div className="flex-1 text-md z-50 max-h-48 my-auto whitespace-pre w-full font-medium">
+              <div className="flex items-center justify-between border-y border-slate-300 p-2">
                 <div>
                   <p>Nombre Usuario</p>
                   <small>Tipo de Usuario</small>
