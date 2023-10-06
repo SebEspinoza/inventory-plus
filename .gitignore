@@ -7,6 +7,10 @@
 
 # testing
 /coverage
+localhost.crt
+localhost.key
+.rnd
+proxy-config.json
 
 # production
 /build

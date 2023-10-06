@@ -4,15 +4,16 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 // Extra imports
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
+
 // Componentes
 import SubMenu from "./SubMenu";
-import storage from "../../Storage/storage";
 // React icons
 import { IoIosArrowBack } from "react-icons/io";
 import { SlSettings } from "react-icons/sl";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { BsPerson, BsBoxSeam } from "react-icons/bs";
 import { TbReportAnalytics } from "react-icons/tb";
+import { MdArrowForwardIos } from "react-icons/md";
 import Logo from "../../assets/Logo.png";
 // Auth
 
@@ -27,26 +28,47 @@ const Sidebar = () => {
 
   const { pathname } = useLocation();
 
-  const Sidebar_animation = {
-    // Desktop view
-    open: {
-      width: "16rem",
-      transition: {
-        damping: 40,
-      },
-    },
-    closed: {
-      width: "4rem",
-      transition: {
-        damping: 40,
-      },
-    },
-  };
+  const Sidebar_animation = isTab
+    ? {
+        // Mobile
+        open: {
+          x: 0,
+          width: "16rem",
+          transition: {
+            damping: 40,
+          },
+        },
+        closed: {
+          x: -250,
+          width: 0,
+          transition: {
+            damping: 40,
+            delay: 0.15,
+          },
+        },
+      }
+    : {
+        // Desktop
+        open: {
+          width: "16rem",
+          transition: {
+            damping: 40,
+          },
+        },
+        closed: {
+          width: "4rem",
+          transition: {
+            damping: 40,
+          },
+        },
+      };
 
   useEffect(() => {
     if (isTab) {
       // Mobile
       setIsOpen(false);
+    } else {
+      setIsOpen(true);
     }
   }, [isTab]);
 
@@ -64,13 +86,12 @@ const Sidebar = () => {
   ];
 
   const handleLogout = () => {
-    storage.remove("authUser");
-    storage.remove("authToken");
+    localStorage.removeItem("authToken");
     go("/login");
   };
 
   return (
-    <div className="h-full sticky top-0 z-10 pr-10 lg:pr-0">
+    <div className="h-full fixed md:sticky md:left-0 md:top-0 z-10 lg:pr-0">
       <div
         onClick={() => setIsOpen(false)}
         className={`md:hidden fixed inset-0 max-h-screen z-[998] bg-black/50 ${isOpen ? "block" : "hidden"}`}
@@ -117,7 +138,6 @@ const Sidebar = () => {
             {/* SubMenu */}
             {isOpen && (
               <div className="border-y py-5 border-slate-300">
-                <h2 className="pl-3 text-slate-500 inline-block mb-2">Product catego</h2>
                 {subMenusList.map((menu) => (
                   <div key={menu.name} className="flex flex-col gap-1">
                     <SubMenu data={menu} />
@@ -159,6 +179,12 @@ const Sidebar = () => {
           <IoIosArrowBack size={25} />
         </motion.div>
       </motion.div>
+      <div
+        className="md:hidden bg-color-crema rounded-md flex items-center h-[6%] absolute left-[-6px] top-[50%] border"
+        onClick={() => setIsOpen(true)}
+      >
+        <MdArrowForwardIos size={25} className="fill-color-cafe-claro" />
+      </div>
     </div>
   );
 };

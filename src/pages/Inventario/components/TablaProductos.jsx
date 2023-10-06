@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // Otros imports
 import axios from "axios";
 import { createColumnHelper, getCoreRowModel, useReactTable, flexRender, getPaginationRowModel, getFilteredRowModel } from "@tanstack/react-table";
+
 // React Icons
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { IoIosAddCircle, IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -11,6 +12,7 @@ import InputBuscar from "./InputBuscar";
 //componentes
 import BotonAgregar from "./BotonAgregar";
 import FormEditar from "./FormEditar";
+import Swal from "sweetalert2";
 
 //url API
 const url = "https://inventoryplus.cyclic.app/products";
@@ -135,14 +137,34 @@ const TablaProductos = () => {
   };
 
   const handleProductoEliminado = async (id) => {
-    await axios.delete(url + "/" + id);
-    getProducts();
+    const result = await Swal.fire({
+      title: "¿Seguro que deseas eliminar este producto?",
+      text: "Este paso no se puede revertir",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Si, Eliminemoslo!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await axios.delete(url + "/" + id);
+        Swal.fire("Eliminado!", "El producto ha sido eliminado.", "success");
+        getProducts();
+      } catch (error) {
+        console.error("Error al eliminar el producto", error);
+        Swal.fire("Error", "Ocurrió un error al eliminar el producto", "error");
+      }
+    }
   };
 
   return (
     <div>
-      <div className="p-2 mx-auto  text-color-crema fill-color-cafe-oscuro">
-        <div className="flex justify-between mb-4">
+      <div className="p-2 mx-auto  text-color-crema bg-color-cafe-claro rounded-lg shadow-neumorphicBar">
+        {/*Botones superiores*/}
+        <div className="flex  justify-between mb-4 p-2">
           <div className="w-full flex items-center gap-1">
             <BiSearchAlt size={20} />
             <InputBuscar
@@ -162,7 +184,7 @@ const TablaProductos = () => {
           {visibleEdit && <FormEditar onClose={() => toggleSeccion(2)} onProductoEditado={handleProductoEditado} rest={formDataEdit} />}
         </div>
         {/*Tabla */}
-        <table className="border border-color-cafe-oscuro w-full text-left">
+        <table className="w-full text-left">
           <thead className="bg-color-cafe-oscuro">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -192,7 +214,8 @@ const TablaProductos = () => {
             )}
           </tbody>
         </table>
-        <div className="flex flex-row justify-between mt-2">
+        {/*Botones inferiores */}
+        <div className="flex flex-row justify-between mt-2 p-2">
           <div className="flex items-start justify-start ">
             <BotonDescargar data={data} fileName={`Stock ${fechaActual.toLocaleString()}`} />
           </div>

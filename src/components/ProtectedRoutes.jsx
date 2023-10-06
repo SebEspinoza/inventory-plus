@@ -1,13 +1,16 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import storage from "../Storage/storage";
+// Auth Component
+import { useAuth } from "../context/AuthContext";
 
 const ProtectedRoutes = ({ children }) => {
-  const authUser = storage.get("authUser");
-  if (!authUser) {
+  const { authToken } = useAuth();
+
+  if (!authToken) {
     return <Navigate to="/login" />;
+  } else {
+    return <Outlet />;
   }
-  return <Outlet />;
 };
 
 export default ProtectedRoutes;

@@ -3,7 +3,8 @@ import { BiSolidUser } from "react-icons/bi";
 import axios from "axios";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
-import storage from "../Storage/storage";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const url = "https://inventoryplus.cyclic.app/auth/login"; // URL de inicio de sesión
 
@@ -29,6 +30,20 @@ const Login = () => {
     }
   };
 
+  // Toast
+  const loginSucces = () => {
+    toast.success("Bienvenido!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
   const handleLogin = async () => {
     try {
       const response = await axios.post(url, {
@@ -38,15 +53,16 @@ const Login = () => {
       // Datos correctos
       if (response.data.success === true) {
         const authToken = response.data.token;
-        storage.set("authUser", response.data.data);
-        storage.set("authToken", authToken);
-        go("/");
+        localStorage.setItem("authToken", authToken);
+        loginSucces();
+        setTimeout(() => {
+          go("/");
+        }, 3000);
         // Datos incorrectos
       } else if (response.data.success === false) {
         alert("Los datos son incorrectos");
       }
     } catch (error) {
-      console.log("Datos erroneos");
       console.error("Error al iniciar sesión: ", error);
     }
   };
@@ -73,6 +89,7 @@ const Login = () => {
           </button>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

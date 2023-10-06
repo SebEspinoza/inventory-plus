@@ -3,7 +3,6 @@ import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
 import Analytics from "./pages/Analytics";
 import Trabajadores from "./pages/Trabajadores";
-import Build from "./pages/Build";
 import Settings from "./pages/Settings";
 import Inventario from "./pages/Inventario/Inventario";
 import Login from "./pages/Login";
@@ -15,14 +14,11 @@ const App = () => {
       <RootLayout>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route element={<ProtectedRoutes />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/trabajadores" element={<Trabajadores />} />
-            <Route path="/inventario" element={<Inventario />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/build/:bID" element={<Build />} />
-            <Route path="/analytics/:aID" element={<Analytics />} />
-          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/trabajadores" element={<Trabajadores />} />
+          <Route path="/inventario" element={<Inventario />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/Estadísticas/:aID" element={<Analytics />} />
         </Routes>
       </RootLayout>
     </BrowserRouter>

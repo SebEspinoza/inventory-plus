@@ -6,7 +6,7 @@ const RootLayout = ({ children }) => {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
 
-  const divClass = isLoginPage ? "flex gap-5 bg-[#fff0c9]" : "flex gap-5";
+  const divClass = isLoginPage ? "flex gap-5 bg-[#fff0c9]" : "flex md:gap-5";
 
   return (
     <div className={divClass}>
