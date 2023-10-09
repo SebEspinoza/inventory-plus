@@ -11,7 +11,7 @@ const RootLayout = ({ children }) => {
   return (
     <div className={divClass}>
       {!isLoginPage && <Sidebar />}
-      <main className="max-w-5xl flex-1 mx-auto py-4">{children}</main>
+      <main className="max-w-5xl flex-1 mx-auto md:py-4">{children}</main>
     </div>
   );
 };

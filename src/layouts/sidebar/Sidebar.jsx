@@ -91,7 +91,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="h-full fixed md:sticky md:left-0 md:top-0 z-10 lg:pr-0">
+    <div className="h-full fixed md:sticky md:left-0 md:top-0 z-50 lg:pr-0">
       <div
         onClick={() => setIsOpen(false)}
         className={`md:hidden fixed inset-0 max-h-screen z-[998] bg-black/50 ${isOpen ? "block" : "hidden"}`}
@@ -100,7 +100,7 @@ const Sidebar = () => {
         variants={Sidebar_animation}
         //initial={{ x: isTab ? -250 : 0 }}
         animate={isOpen ? "open" : "closed"}
-        className="bg-color-crema text-gray shadow-neumorphicBar rounded-tr-xl rounded-br-xl z-[999]
+        className="bg-color-crema text-gray shadow-neumorphicBar rounded-tr-lg rounded-br-lg z-[999]
          w-[16rem] max-w-[16rem] h-screen overflow-hidden md:relative fixed"
       >
         {/*Logo */}
@@ -161,7 +161,7 @@ const Sidebar = () => {
                   <p>Nombre Usuario</p>
                   <small>Tipo de Usuario</small>
                 </div>
-                <button className="text-color-crema py-1.5 px-3 text-xs bg-rojizo rounded-xl" onClick={handleLogout}>
+                <button className="text-color-crema py-1.5 px-3 text-xs bg-danger rounded-xl shadow-neumorphicLogOutButton" onClick={handleLogout}>
                   Cerrar Sesión
                 </button>
               </div>

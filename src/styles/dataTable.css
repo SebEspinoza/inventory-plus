@@ -1,6 +1,6 @@
 #root {
   --color-principal: #512800;
-  --color-text: rgba(0, 0, 0, 0.7);
+  --color-text: #fff0c9;
 }
 
 .container-table {
@@ -32,12 +32,9 @@
 
 .dataTable th {
   background-color: var(--color-principal);
-  color: rgb(255, 255, 255);
   border: none;
   text-align: left;
   padding: 10px;
-  border: 0px solid rgb(153, 153, 153);
-  border-right: 1px solid rgba(255, 255, 255, 0.514);
 }
 
 .dataTable td {
@@ -46,15 +43,10 @@
   color: var(--color-text);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-.dataTable tr {
-  background-color: rgb(255, 255, 255);
-  border-radius: 1%;
-}
 
 table {
   border-collapse: collapse;
   width: 100%;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .search {
@@ -75,9 +67,6 @@ table {
   background-color: #540b0b00;
   border: none;
   width: 40px;
-}
-.bi.bi-search {
-  color: black;
 }
 
 .pagination {
@@ -155,13 +144,11 @@ table {
   }
 
   table tr {
-    border-bottom: 3px solid #ddd;
+    margin-bottom: 3%;
     display: block;
-    margin-bottom: 0.625em;
   }
 
   table td {
-    border-bottom: 1px solid #ddd;
     display: block;
     font-size: 0.8em;
     text-align: right;
@@ -173,6 +160,8 @@ table {
     float: left;
     font-weight: bold;
     text-transform: uppercase;
+    color: white;
+    text-decoration: underline;
   }
 
   table td:last-child {

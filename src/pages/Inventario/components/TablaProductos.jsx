@@ -13,6 +13,7 @@ import InputBuscar from "./InputBuscar";
 import BotonAgregar from "./BotonAgregar";
 import FormEditar from "./FormEditar";
 import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
 
 //url API
 const url = "https://inventoryplus.cyclic.app/products";
@@ -136,6 +137,20 @@ const TablaProductos = () => {
     toggleSeccion(2);
   };
 
+  // Toast
+  const deleteSucces = () => {
+    toast.error("Producto Eliminado", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
   const handleProductoEliminado = async (id) => {
     const result = await Swal.fire({
       title: "¿Seguro que deseas eliminar este producto?",
@@ -143,6 +158,7 @@ const TablaProductos = () => {
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
+      background: "#fff0c9",
       cancelButtonColor: "#d33",
       cancelButtonText: "Cancelar",
       confirmButtonText: "Si, Eliminemoslo!",
@@ -151,7 +167,7 @@ const TablaProductos = () => {
     if (result.isConfirmed) {
       try {
         await axios.delete(url + "/" + id);
-        Swal.fire("Eliminado!", "El producto ha sido eliminado.", "success");
+        deleteSucces();
         getProducts();
       } catch (error) {
         console.error("Error al eliminar el producto", error);
@@ -161,8 +177,11 @@ const TablaProductos = () => {
   };
 
   return (
-    <div>
-      <div className="p-2 mx-auto  text-color-crema bg-color-cafe-claro rounded-lg shadow-neumorphicBar">
+    <div className="mb-4">
+      <div className="flex justify-center mb-10">
+        <h1 className="text-5xl underline text-color-crema">Productos</h1>
+      </div>
+      <div className="p-2 mx-auto  text-color-crema bg-color-cafe-claro rounded-lg shadow-neumorphicTable">
         {/*Botones superiores*/}
         <div className="flex  justify-between mb-4 p-2">
           <div className="w-full flex items-center gap-1">
@@ -282,6 +301,7 @@ const TablaProductos = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

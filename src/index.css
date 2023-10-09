@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    background: #fff0c99c;
+    background: #fff0c9;
   }
   h1 {
     @apply text-xl font-medium capitalize;
@@ -16,7 +16,7 @@
 }
 
 .active {
-  @apply bg-color-cafe-claro text-color-crema shadow-neumorphicButton;
+  @apply bg-rojizo text-color-crema shadow-neumorphicActiveButton;
 }
 
 .download-btn {

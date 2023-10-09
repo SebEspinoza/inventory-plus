@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import axios from "axios";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
 import "../../../../styles/dataTable.css";
+import { ToastContainer, toast } from "react-toastify";
+import { IoIosAddCircle } from "react-icons/io";
+import FormAgregar from "../FormAgregar";
 
 const url = "https://inventoryplus.cyclic.app/products";
 
@@ -20,6 +24,10 @@ const TablaResponsive = () => {
     date_of_expiry: null,
   });
 
+  const toggleBodyOverflow = (shouldHideOverflow) => {
+    document.body.style.overflow = shouldHideOverflow ? "hidden" : "auto";
+  };
+
   const getProducts = async () => {
     const respuesta = await axios.get(url);
     setProducts(respuesta.data);
@@ -32,6 +40,7 @@ const TablaResponsive = () => {
   const toggleSeccion = (type) => {
     if (type === 1) {
       setVisibleForm(!visibleForm);
+      toggleBodyOverflow(!visibleForm);
     }
 
     if (type === 2) {
@@ -51,24 +60,58 @@ const TablaResponsive = () => {
   };
 
   const handleProductoEliminado = async (id) => {
-    await axios.delete(url + "/" + id);
-    getProducts();
+    const result = await Swal.fire({
+      title: "¿Seguro que deseas eliminar este producto?",
+      text: "Este paso no se puede revertir",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      background: "#fff0c9",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Si, Eliminemoslo!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await axios.delete(url + "/" + id);
+        deleteSucces();
+        getProducts();
+      } catch (error) {
+        console.error("Error al eliminar el producto", error);
+        Swal.fire("Error", "Ocurrió un error al eliminar el producto", "error");
+      }
+    }
   };
+
+  // Toast
+  const deleteSucces = () => {
+    toast.error("Producto Eliminado", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
   return (
     <div className="container-table">
+      <h2 className="text-5xl text-color-crema underline mb-4 w-full text-center">Productos</h2>
       <div className="dataTable ">
-        <h2>Productos</h2>
-        <div className="search">
-          <input placeholder="Search" />
-          <button>
-            <i className="bi bi-search"></i>
-          </button>
+        <div className="search flex justify-between mb-4 p-2">
+          <div className=" flex items-center gap-1">
+            <input type="text" placeholder="Buscar..." className="p-2 bg-white outline-none border-b-2 duration-300 border-color-crema" />
+          </div>
         </div>
-        <table>
+        <table className="bg-none">
           <thead></thead>
-          <tbody>
+          <tbody className="bg-transparent">
             {products.map((product, i) => (
-              <tr key={product._id} className="text-center text-md">
+              <tr key={product._id} className="text-center text-md text-color-crema bg-color-cafe-claro shadow-neumorphicTr mb-6 rounded-md">
                 <td data-label={"#"}>{i + 1}</td>
                 <td data-label={"Nombre:"}>{product.name}</td>
                 <td data-label={"Cantidad:"}>{product.quantity}</td>
@@ -83,17 +126,17 @@ const TablaResponsive = () => {
                 </td>
                 <td className="flex justify-center">
                   <button
-                    className="bg-warning text-black px-3 py-1 rounded-[10px] mr-1 ml-1"
+                    className="bg-warning text-black px-3 py-1 rounded-[5px] mr-1 ml-1"
                     onClick={() => {
-                      console.log(products);
+                      console.log(product);
                     }}
                   >
                     <FaEdit />
                   </button>
                   <button
-                    className="bg-danger text-white px-3 py-1 rounded-[10px] mr-1 ml-1"
+                    className="bg-danger text-white px-3 py-1 rounded-[5px] mr-1 ml-1"
                     onClick={() => {
-                      console.log("handleProductoEliminado(product._id)");
+                      handleProductoEliminado(product._id);
                     }}
                   >
                     <FaTrashAlt />
@@ -104,6 +147,14 @@ const TablaResponsive = () => {
           </tbody>
         </table>
       </div>
+      {/* Form Agregar */}
+      {visibleForm && <FormAgregar onClose={() => toggleSeccion(1)} onProductoAgregado={handleProductoAgregado} />}
+      <div className="md:hidden w-full right-0 bottom-0 z-10 sticky flex justify-end pb-4 mx-0">
+        <button className="rounded-full text-color-crema" onClick={() => toggleSeccion(1)}>
+          <IoIosAddCircle size={50} />
+        </button>
+      </div>
+      <ToastContainer />
     </div>
   );
 };

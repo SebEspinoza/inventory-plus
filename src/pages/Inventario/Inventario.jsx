@@ -10,7 +10,7 @@ const Inventario = () => {
 
   return (
     <div>
-      <div className="flex-grow p-4  rounded-xl">{isDesktopOrLaptop ? <TablaProductos /> : <TablaResponsive />}</div>
+      <div className="flex-grow md:p-4  md:rounded-xl bg-color-cafe-claro">{isDesktopOrLaptop ? <TablaProductos /> : <TablaResponsive />}</div>
     </div>
   );
 };

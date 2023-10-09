@@ -235,6 +235,9 @@ module.exports = {
       rojizo: {
         DEFAULT: "#6f1d1b",
       },
+      logOut: {
+        DEFAULT: "linear-gradient(145deg, #ee3f44, #c8353a)",
+      },
     },
     extend: {
       fontFamily: {
@@ -243,8 +246,12 @@ module.exports = {
         Russo: "Russo One",
       },
       boxShadow: {
-        neumorphicBar: "7px 7px 10px #ffd15e, -7px -7px 10px #f3e9cf",
+        neumorphicBar: "7px -7px 15px #c7bb9d,-7px 7px 15px #ffffd7",
         neumorphicButton: "inset 6px 6px 6px #251200, inset -6px -6px 6px #422100",
+        neumorphicActiveButton: "inset 5px 5px 10px #401110,inset -5px -5px 10px #9e2926",
+        neumorphicTable: "6px 6px 12px #201000,-6px -6px 12px #824000",
+        neumorphicLogOutButton: "inset -1px -1px 10px #59181a,inset 5px 5px 10px #ff5e66",
+        neumorphicTr: "7px 7px 21px #391c00,-7px -7px 21px #693400",
       },
     },
   },
