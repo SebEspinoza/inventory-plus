@@ -51,6 +51,7 @@ const TablaResponsive = () => {
   const handleProductoAgregado = () => {
     getProducts();
     toggleSeccion(1);
+    addToast();
   };
 
   const handleProductoEditado = (product) => {
@@ -98,6 +99,19 @@ const TablaResponsive = () => {
     });
   };
 
+  const addToast = () => {
+    toast.success("Producto agregado!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
   return (
     <div className="container-table">
       <h2 className="text-5xl text-color-crema underline mb-4 w-full text-center">Productos</h2>
@@ -122,7 +136,11 @@ const TablaResponsive = () => {
                 ) : null}
 
                 <td className="flex justify-center">
-                  <img src={product.img} alt={product.name} className="h-24 w-24 object-cover" />
+                  {product.img.startsWith("data:image") ? (
+                    <img src={product.img} alt={product.name} className="h-24 w-24 object-cover rounded-full border border-color-crema" />
+                  ) : (
+                    <img src={product.img} alt={product.name} className="h-24 w-24 object-cover rounded-full border border-color-crema" />
+                  )}
                 </td>
                 <td className="flex justify-center">
                   <button
@@ -131,7 +149,7 @@ const TablaResponsive = () => {
                       console.log(product);
                     }}
                   >
-                    <FaEdit />
+                    <FaEdit size={25} />
                   </button>
                   <button
                     className="bg-danger text-white px-3 py-1 rounded-[5px] mr-1 ml-1"
@@ -139,7 +157,7 @@ const TablaResponsive = () => {
                       handleProductoEliminado(product._id);
                     }}
                   >
-                    <FaTrashAlt />
+                    <FaTrashAlt size={25} />
                   </button>
                 </td>
               </tr>

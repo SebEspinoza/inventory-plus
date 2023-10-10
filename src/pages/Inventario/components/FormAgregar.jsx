@@ -6,15 +6,23 @@ const url = "https://inventoryplus.cyclic.app/products";
 
 const FormAgregar = (props) => {
   const [visibleForm] = useState(false);
+  const [baseImg, setBaseImg] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Insumos");
   const [formData, setFormData] = useState({
     name: "",
     quantity: 0,
     price: 0,
-    category: "",
+    category: selectedCategory,
     img: "",
-    date_of_expiry: null,
+    date_of_expiry: new Date(Date.now()).toLocaleDateString(),
   });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = await axios.post(url, formData);
+    console.log(data);
+    props.onProductoAgregado();
+  };
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -26,20 +34,13 @@ const FormAgregar = (props) => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    //const data = await axios.post(url, formData);
-    console.log(formData);
-
-    props.onProductoAgregado();
-  };
-
   const closeButtonHandler = () => {
     props.onClose(!visibleForm);
   };
 
   const handleCategoryChange = (e) => {
     const selectedValue = e.target.value;
+
     setSelectedCategory(selectedValue);
     setFormData((prev) => {
       return {
@@ -50,23 +51,32 @@ const FormAgregar = (props) => {
   };
 
   // Función para manejar la selección de la imagen
-  const handleImageChange = (e) => {
+  const uploadImage = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      // Crear una instancia de FileReader
-      const reader = new FileReader();
+    const base64 = await convertBase64(file);
+    setBaseImg(base64);
 
-      // Cuando se carga el archivo, convertirlo a Base64
-      reader.onload = (event) => {
-        setFormData((prev) => ({
-          ...prev,
-          img: event.target.result, // Almacenar la imagen como cadena Base64
-        }));
+    setFormData((prev) => {
+      return {
+        ...prev,
+        img: base64,
       };
+    });
+  };
 
-      // Leer el archivo como una cadena Base64
-      reader.readAsDataURL(file);
-    }
+  // base64
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
   };
 
   return (
@@ -130,7 +140,7 @@ const FormAgregar = (props) => {
                 name="category"
               >
                 <option value="Insumos">Insumos</option>
-                <option value="Alimentos">Alimentos</option>
+                <option value="Alimento">Alimento</option>
               </select>
             </div>
             {selectedCategory !== "Insumos" && (
@@ -169,7 +179,16 @@ const FormAgregar = (props) => {
                       focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 w-[45px]"
                     >
                       <span className="">Elegir</span>
-                      <input id="file-upload" name="img" type="file" className="sr-only" onChange={handleChange} required />
+                      <input
+                        id="file-upload"
+                        name="img"
+                        type="file"
+                        className="sr-only"
+                        onChange={(e) => {
+                          uploadImage(e);
+                        }}
+                        required
+                      />
                     </label>
                     <p className="pl-1 text-white"> una imagen para el producto</p>
                   </div>
@@ -177,6 +196,7 @@ const FormAgregar = (props) => {
                 </div>
               </div>
             </div>
+            {baseImg && <img src={baseImg} alt="No Image" />}
           </div>
 
           <div className="flex justify-between mt-6">
