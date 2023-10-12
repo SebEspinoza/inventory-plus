@@ -1,27 +1,29 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
 import Analytics from "./pages/Analytics";
-import Trabajadores from "./pages/Trabajadores";
+import Trabajadores from "./pages/trabajadores/Trabajadores";
 import Settings from "./pages/Settings";
 import Inventario from "./pages/Inventario/Inventario";
 import Login from "./pages/Login";
-import ProtectedRoutes from "./components/ProtectedRoutes";
+import RequiredAuth from "./components/RequiredAuth";
 
 const App = () => {
   return (
-    <BrowserRouter basename="/inventory-plus">
-      <RootLayout>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
+    <Routes>
+      <Route path="/" element={<RootLayout />}>
+        // Rutas públicas
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/inventario" element={<Inventario />} />
+        <Route path="/settings" element={<Settings />} />
+        // Rutas protegidas
+        <Route element={<RequiredAuth allowedRoles={true} />}>
           <Route path="/trabajadores" element={<Trabajadores />} />
-          <Route path="/inventario" element={<Inventario />} />
-          <Route path="/settings" element={<Settings />} />
           <Route path="/Estadísticas/:aID" element={<Analytics />} />
-        </Routes>
-      </RootLayout>
-    </BrowserRouter>
+        </Route>
+      </Route>
+    </Routes>
   );
 };
 

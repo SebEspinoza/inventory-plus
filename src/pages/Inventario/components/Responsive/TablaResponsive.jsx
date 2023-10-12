@@ -41,6 +41,7 @@ const TablaResponsive = () => {
     if (type === 1) {
       setVisibleForm(!visibleForm);
       toggleBodyOverflow(!visibleForm);
+      window.scrollTo(0, 0);
     }
 
     if (type === 2) {

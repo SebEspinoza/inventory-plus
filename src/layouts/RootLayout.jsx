@@ -1,8 +1,9 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import Sidebar from "./sidebar/Sidebar";
+import { Outlet } from "react-router-dom";
 
-const RootLayout = ({ children }) => {
+const RootLayout = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
 
@@ -11,7 +12,9 @@ const RootLayout = ({ children }) => {
   return (
     <div className={divClass}>
       {!isLoginPage && <Sidebar />}
-      <main className="max-w-5xl flex-1 mx-auto md:py-4">{children}</main>
+      <main className="max-w-5xl flex-1 mx-auto md:py-4">
+        <Outlet />
+      </main>
     </div>
   );
 };

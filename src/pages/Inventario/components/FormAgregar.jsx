@@ -96,7 +96,7 @@ const FormAgregar = (props) => {
                 id="username"
                 name="name"
                 type="text"
-                className="block w-full px-4 py-2 mt-2 bg-white border rounded-md focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2 bg-white text-black border rounded-md focus:outline-none focus:ring"
                 onChange={handleChange}
                 required
               />
@@ -110,7 +110,7 @@ const FormAgregar = (props) => {
                 id="quantity"
                 name="quantity"
                 type="number"
-                className="block w-full px-4 py-2 mt-2 bg-white border rounded-md focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2 bg-white border rounded-md focus:outline-none focus:ring text-black"
                 onChange={handleChange}
                 required
               />
@@ -124,7 +124,7 @@ const FormAgregar = (props) => {
                 id="price"
                 type="number"
                 name="price"
-                className="block w-full px-4 py-2 mt-2 bg-white border  rounded-md focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2 bg-white border  rounded-md focus:outline-none focus:ring text-black"
                 onChange={handleChange}
                 required
               />
@@ -134,7 +134,7 @@ const FormAgregar = (props) => {
                 Categoria :
               </label>
               <select
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white rounded-md  focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white rounded-md  focus:outline-none focus:ring text-black"
                 value={selectedCategory}
                 onChange={handleCategoryChange}
                 name="category"
@@ -178,7 +178,7 @@ const FormAgregar = (props) => {
                       className="relative cursor-pointer bg-white rounded-sm font-medium text-indigo-600 hover:text-indigo-500 
                       focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 w-[45px]"
                     >
-                      <span className="">Elegir</span>
+                      <span className="text-black">Elegir</span>
                       <input
                         id="file-upload"
                         name="img"

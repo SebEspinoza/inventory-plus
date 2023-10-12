@@ -2,18 +2,24 @@ import React, { useState } from "react";
 import { BiSolidUser } from "react-icons/bi";
 import axios from "axios";
 import "../styles/Login.css";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useAuth from "../hooks/useAuth";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const url = "https://inventoryplus.cyclic.app/auth/login"; // URL de inicio de sesión
 
 const Login = () => {
+  const { setAuth } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const go = useNavigate();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const handleInputChange = (e) => {
@@ -52,12 +58,15 @@ const Login = () => {
       });
       // Datos correctos
       if (response.data.success === true) {
-        const authToken = response.data.token;
-        localStorage.setItem("authToken", authToken);
+        const authToken = response?.data?.token;
+        const role = response?.data?.type;
+        const userName = response?.data?.data;
+        setAuth({ authToken, role, userName });
         loginSucces();
         setTimeout(() => {
-          go("/");
-        }, 3000);
+          navigate(from, { replace: true });
+        }, 2000);
+
         // Datos incorrectos
       } else if (response.data.success === false) {
         alert("Los datos son incorrectos");

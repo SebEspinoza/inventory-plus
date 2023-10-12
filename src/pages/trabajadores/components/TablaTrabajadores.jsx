@@ -16,38 +16,38 @@ import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 
 //url API
-const url = "https://inventoryplus.cyclic.app/products";
+const url = "https://inventoryplus.cyclic.app/users";
 
-const TablaProductos = () => {
+const TablaTrabajadores = () => {
   const columnHelper = createColumnHelper();
-  const [products, setProducts] = useState([]);
+  const [workers, setWorkers] = useState([]);
   const [visibleForm, setVisibleForm] = useState(false);
   const [visibleEdit, setVisibleEdit] = useState(false);
   const [data, setData] = useState([]);
   const [formDataEdit, setFormDataEdit] = useState({
     _id: "",
-    name: "",
-    quantity: 0,
-    price: 0,
-    category: "",
-    img: "",
-    date_of_expiry: null,
+    username: "",
+    password: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    role: Boolean,
   });
   const [globalFilter, setGlobalFilter] = useState("");
   const fechaActual = new Date();
 
-  const getProducts = async () => {
+  const getWorkers = async () => {
     try {
       const respuesta = await axios.get(url);
-      setProducts(respuesta.data);
+      setWorkers(respuesta.data);
       setData(respuesta.data);
     } catch (error) {
-      console.error("Error al obtener los productos:", error);
+      console.error("Error al obtener los trabajadores:", error);
     }
   };
 
   useEffect(() => {
-    getProducts();
+    getWorkers();
   }, []);
 
   const columns = [
@@ -56,29 +56,31 @@ const TablaProductos = () => {
       cell: (info) => <span>{info.row.index + 1}</span>,
       header: "Nro",
     }),
-    columnHelper.accessor("img", {
-      cell: (info) => <img src={info?.getValue()} alt="..." className="rounded-full w-10 h-10 object-cover" />,
-      header: "Imagen",
-    }),
-    columnHelper.accessor("name", {
+    columnHelper.accessor("username", {
       cell: (info) => <span>{info.getValue()}</span>,
-      header: "Producto",
+      header: "Nombre de usuario",
     }),
-    columnHelper.accessor("quantity", {
+    columnHelper.accessor("email", {
       cell: (info) => <span>{info.getValue()}</span>,
-      header: "Stock",
+      header: "Email",
     }),
-    columnHelper.accessor("price", {
+    columnHelper.accessor("first_name", {
       cell: (info) => <span>{info.getValue()}</span>,
-      header: "Precio",
+      header: "Nombre",
     }),
-    columnHelper.accessor("category", {
+    columnHelper.accessor("last_name", {
       cell: (info) => <span>{info.getValue()}</span>,
-      header: "Categoria",
+      header: "Apellido",
     }),
-    columnHelper.accessor("date_of_expiry", {
-      cell: (info) => <span>{info.getValue().toString().split("T")[0]}</span>,
-      header: "Fecha de caducidad",
+    columnHelper.accessor("role", {
+      cell: (info) => {
+        if (info.getValue() === true) {
+          return <span>Administrador</span>;
+        } else {
+          return <span>Trabajador</span>;
+        }
+      },
+      header: "Rol",
     }),
     columnHelper.accessor("botones", {
       cell: (info) => (
@@ -86,7 +88,7 @@ const TablaProductos = () => {
           <button
             className="bg-warning text-black px-3 py-1 rounded-[10px] mr-1 ml-1"
             onClick={() => {
-              handleProductoEditado(info.row.original);
+              handleTrabajadorEditado(info.row.original);
             }}
           >
             <FaEdit />
@@ -94,7 +96,7 @@ const TablaProductos = () => {
           <button
             className="bg-danger text-white px-3 py-1 rounded-[10px] mr-1 ml-1"
             onClick={() => {
-              handleProductoEliminado(info.row.original._id);
+              handleTrabajadorEliminado(info.row.original._id);
             }}
           >
             <FaTrashAlt />
@@ -126,20 +128,21 @@ const TablaProductos = () => {
     }
   };
 
-  const handleProductoAgregado = () => {
-    getProducts();
+  const handleTrabajadorAgregado = () => {
+    getWorkers();
     toggleSeccion(1);
+    addToast();
   };
 
-  const handleProductoEditado = (product) => {
-    setFormDataEdit(product);
-    getProducts();
+  const handleTrabajadorEditado = (worker) => {
+    setFormDataEdit(worker);
+    getWorkers();
     toggleSeccion(2);
   };
 
   // Toast
   const deleteSucces = () => {
-    toast.error("Producto Eliminado", {
+    toast.error("Trabajador Eliminado", {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -151,9 +154,22 @@ const TablaProductos = () => {
     });
   };
 
-  const handleProductoEliminado = async (id) => {
+  const addToast = () => {
+    toast.success("Trabajador agregado!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  const handleTrabajadorEliminado = async (id) => {
     const result = await Swal.fire({
-      title: "¿Seguro que deseas eliminar este producto?",
+      title: "¿Seguro que deseas eliminar a este trabajador?",
       text: "Este paso no se puede revertir",
       icon: "warning",
       showCancelButton: true,
@@ -168,10 +184,10 @@ const TablaProductos = () => {
       try {
         await axios.delete(url + "/" + id);
         deleteSucces();
-        getProducts();
+        getWorkers();
       } catch (error) {
-        console.error("Error al eliminar el producto", error);
-        Swal.fire("Error", "Ocurrió un error al eliminar el producto", "error");
+        console.error("Error al eliminar al trabajador", error);
+        Swal.fire("Error", "Ocurrió un error al eliminar al trabajador", "error");
       }
     }
   };
@@ -179,7 +195,7 @@ const TablaProductos = () => {
   return (
     <div className="mb-4">
       <div className="flex justify-center mb-10">
-        <h1 className="text-5xl underline text-color-crema">Productos</h1>
+        <h1 className="text-5xl underline text-color-crema">Trabajadores</h1>
       </div>
       <div className="p-2 mx-auto  text-color-crema bg-color-cafe-claro rounded-lg shadow-neumorphicTable">
         {/*Botones superiores*/}
@@ -198,9 +214,9 @@ const TablaProductos = () => {
             Agregar
           </button>
           {/* Form Agregar */}
-          {visibleForm && <FormAgregar onClose={() => toggleSeccion(1)} onProductoAgregado={handleProductoAgregado} />}
+          {visibleForm && <FormAgregar onClose={() => toggleSeccion(1)} onProductoAgregado={handleTrabajadorAgregado} />}
           {/* Form Editar */}
-          {visibleEdit && <FormEditar onClose={() => toggleSeccion(2)} onProductoEditado={handleProductoEditado} rest={formDataEdit} />}
+          {visibleEdit && <FormEditar onClose={() => toggleSeccion(2)} onProductoEditado={handleTrabajadorEditado} rest={formDataEdit} />}
         </div>
         {/*Tabla */}
         <table className="w-full text-left">
@@ -236,7 +252,7 @@ const TablaProductos = () => {
         {/*Botones inferiores */}
         <div className="flex flex-row justify-between mt-2 p-2">
           <div className="flex items-start justify-start ">
-            <BotonDescargar data={data} fileName={`Stock ${fechaActual.toLocaleString()}`} />
+            <BotonDescargar data={data} fileName={`trabajadores ${fechaActual.toLocaleString()}`} />
           </div>
           {/*Paginacion*/}
           <div className="flex items-start justify-end gap-2">
@@ -306,4 +322,4 @@ const TablaProductos = () => {
   );
 };
 
-export default TablaProductos;
+export default TablaTrabajadores;
