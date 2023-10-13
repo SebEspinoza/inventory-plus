@@ -12,12 +12,11 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<RootLayout />}>
-        // Rutas públicas
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/inventario" element={<Inventario />} />
         <Route path="/settings" element={<Settings />} />
-        // Rutas protegidas
+
         <Route element={<RequiredAuth allowedRoles={true} />}>
           <Route path="/trabajadores" element={<Trabajadores />} />
           <Route path="/Estadísticas/:aID" element={<Analytics />} />
