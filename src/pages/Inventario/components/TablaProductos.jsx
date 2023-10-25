@@ -161,7 +161,7 @@ const TablaProductos = () => {
       background: "#fff0c9",
       cancelButtonColor: "#d33",
       cancelButtonText: "Cancelar",
-      confirmButtonText: "Si, Eliminemoslo!",
+      confirmButtonText: "SÍ, Eliminemoslo!",
     });
 
     if (result.isConfirmed) {

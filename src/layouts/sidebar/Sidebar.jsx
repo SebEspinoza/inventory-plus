@@ -9,7 +9,6 @@ import { useMediaQuery } from "react-responsive";
 import SubMenu from "./SubMenu";
 // React icons
 import { IoIosArrowBack } from "react-icons/io";
-import { SlSettings } from "react-icons/sl";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { BsPerson, BsBoxSeam } from "react-icons/bs";
 import { TbReportAnalytics } from "react-icons/tb";
@@ -145,13 +144,6 @@ const Sidebar = () => {
                 ))}
               </div>
             )}
-
-            <li>
-              <NavLink to={"/settings"} className="link">
-                <SlSettings size={23} className="min-w-max" />
-                Settings
-              </NavLink>
-            </li>
           </ul>
           {/*Segundo */}
           {isOpen && (

@@ -177,7 +177,7 @@ const TablaTrabajadores = () => {
       background: "#fff0c9",
       cancelButtonColor: "#d33",
       cancelButtonText: "Cancelar",
-      confirmButtonText: "Si, Eliminemoslo!",
+      confirmButtonText: "Sí, Eliminemoslo!",
     });
 
     if (result.isConfirmed) {

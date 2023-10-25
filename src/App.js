@@ -3,7 +3,7 @@ import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
 import Analytics from "./pages/Analytics";
 import Trabajadores from "./pages/trabajadores/Trabajadores";
-import Settings from "./pages/Settings";
+import Unauthorized from "./pages/Unauthorized";
 import Inventario from "./pages/Inventario/Inventario";
 import Login from "./pages/Login";
 import RequiredAuth from "./components/RequiredAuth";
@@ -15,7 +15,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/inventario" element={<Inventario />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
 
         <Route element={<RequiredAuth allowedRoles={true} />}>
           <Route path="/trabajadores" element={<Trabajadores />} />

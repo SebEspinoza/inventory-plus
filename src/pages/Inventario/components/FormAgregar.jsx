@@ -14,7 +14,7 @@ const FormAgregar = (props) => {
     price: 0,
     category: selectedCategory,
     img: "",
-    date_of_expiry: new Date(Date.now()).toLocaleDateString(),
+    date_of_expiry: new Date(Date.now()),
   });
 
   const handleSubmit = async (e) => {
@@ -144,7 +144,7 @@ const FormAgregar = (props) => {
               </select>
             </div>
             {selectedCategory !== "Insumos" && (
-              <div>
+              <div className="text-black">
                 <label className="text-white" htmlFor="date_of_expiry">
                   Fecha :
                 </label>
@@ -196,7 +196,7 @@ const FormAgregar = (props) => {
                 </div>
               </div>
             </div>
-            {baseImg && <img src={baseImg} alt="No Image" />}
+            {baseImg && <img className="ml-[25%] max-w-[50%] h-auto" src={baseImg} alt="No data" />}
           </div>
 
           <div className="flex justify-between mt-6">
