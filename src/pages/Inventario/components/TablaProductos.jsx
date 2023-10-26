@@ -69,7 +69,17 @@ const TablaProductos = () => {
       header: "Stock",
     }),
     columnHelper.accessor("price", {
-      cell: (info) => <span>{info.getValue()}</span>,
+      cell: (info) => (
+        <span>
+          $
+          {new Intl.NumberFormat("es-CL", {
+            style: "decimal",
+            useGrouping: true,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2,
+          }).format(info.getValue())}
+        </span>
+      ),
       header: "Precio",
     }),
     columnHelper.accessor("category", {

@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BiSolidUser } from "react-icons/bi";
-import axios from "axios";
 import "../styles/Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useAuth from "../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
-
-const url = "https://inventoryplus.cyclic.app/auth/login"; // URL de inicio de sesión
+import { useSelector, useDispatch } from "react-redux";
+import { ApiCall } from "../components/ApiCall/ApiCall";
 
 const Login = () => {
+  const state = useSelector((state) => state.UserReducer);
+  const dispatch = useDispatch();
+  const initialValue = useRef(true);
+
+  useEffect(() => {
+    if (!initialValue.current) {
+      console.log(state);
+    } else {
+      initialValue.current = false;
+    }
+  }, []);
+
   const { setAuth } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
@@ -77,20 +88,15 @@ const Login = () => {
 
     if (formData.email.trim() !== "" && formData.password.trim() !== "") {
       try {
-        const response = await axios.post(url, {
-          email: formData.email,
-          password: formData.password,
-        });
+        const response = await ApiCall({ email: formData.email, password: formData.password }, dispatch);
         // Datos correctos
-        if (response.data.success === true) {
-          const authToken = response?.data?.token;
-          const role = response?.data?.type;
-          const userName = response?.data?.data;
+        if (response.success === true) {
+          const authToken = response?.token;
+          const role = response?.type;
+          const userName = response?.data;
           setAuth({ authToken, role, userName });
-          console.log(authToken);
-          console.log(role);
-          console.log(userName);
           loginSucces();
+
           setTimeout(() => {
             navigate(from, { replace: true });
           }, 2000);
@@ -99,8 +105,8 @@ const Login = () => {
         } else {
           errorLogin("Los datos son incorrectos");
           setTimeout(() => {
-            Window.location.reload();
-          }, 1000);
+            window.location.reload();
+          }, 2000);
         }
       } catch (error) {
         if (error.response && error.response.status === 401) {
@@ -108,6 +114,7 @@ const Login = () => {
           errorLogin(error.response.data.message);
         } else {
           console.error("Error al iniciar sesión: ", error);
+          errorLogin("Error al iniciar sesión");
         }
       }
     }

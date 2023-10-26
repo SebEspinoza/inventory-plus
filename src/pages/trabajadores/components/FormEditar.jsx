@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
-const url = "https://inventoryplus.cyclic.app/products";
+const url = "https://inventoryplus.cyclic.app/users";
 
 const FormEditar = (props) => {
   const [visibleForm] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(props.rest.role);
   const [formData, setFormData] = useState({
     _id: props.rest._id || "",
-    name: props.rest.name || "",
-    quantity: props.rest.quantity || 0,
-    price: props.rest.price || 0,
-    category: props.rest.category || "",
-    img: props.rest.img || "",
-    date_of_expiry: props.rest.date_of_expiry || null,
+    username: props.rest.username || "",
+    password: props.rest.password || "",
+    email: props.rest.email || "",
+    first_name: props.rest.first_name || "",
+    last_name: props.rest.last_name || "",
+    role: props.rest.role || Boolean,
   });
 
   const handleChange = (e) => {
@@ -30,54 +32,138 @@ const FormEditar = (props) => {
     e.preventDefault();
     const data = await axios.put(url + "/" + props.rest._id, formData);
     console.log(data);
-    props.onProductoEditado();
+    props.onWorkerEditado();
+    editToast();
   };
 
   const buttonHandler = () => {
     props.onClose(!visibleForm);
   };
 
+  const editToast = () => {
+    toast.warn("Producto editado!", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  const handleCategoryChange = (e) => {
+    const selectedValue = e.target.value;
+
+    setSelectedCategory(selectedValue);
+    setFormData((prev) => {
+      return {
+        ...prev,
+        role: selectedValue,
+      };
+    });
+  };
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-md backdrop-filter">
-      {/*Agregar Items */}
-      <div className="text-color-cafe-oscuro flex justify-center items-center absolute top-0 left-0 w-[100%] h-[100%]">
-        <form onSubmit={handleEdit} className="w-[420px] bg-color-crema flex flex-col px-[50px] py-[30px] shadow-lg rounded-[20px]">
-          <div className="close-btn ml-auto text-[28px]  flex justify-center items-center rounded-[20px] cursor-pointer text-danger-600">
-            <RiCloseCircleLine onClick={buttonHandler} />
+    <div className="inset-0 z-20 flex items-start justify-center absolute backdrop-blur-md backdrop-filter h-screen overflow-y-auto">
+      <section className="max-w-4xl p-6 mx-auto rounded-md shadow-md dark:bg-color-cafe-oscuro mt-4 ">
+        <div className="close-btn flex justify-end items-center rounded-[20px] cursor-pointer text-danger-600">
+          <RiCloseCircleLine onClick={buttonHandler} size={25} />
+        </div>
+        <h1 className="text-xl font-bold text-white capitalize dark:text-white">Editar trabajador</h1>
+        <form onSubmit={handleEdit}>
+          <div className="grid grid-cols-1 gap-6 mt-8 sm:grid-cols-2">
+            <div>
+              <label className="text-white dark:text-gray-200" htmlFor="username">
+                Nombre de usuario :
+              </label>
+              <input
+                id="username"
+                name="username"
+                type="text"
+                className="block w-full px-4 py-2 mt-2 bg-white text-black border rounded-md focus:outline-none focus:ring"
+                onChange={handleChange}
+                placeholder={formData.username}
+              />
+            </div>
+
+            <div>
+              <label className="text-white" htmlFor="email">
+                Email :
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                className="block w-full px-4 py-2 mt-2 bg-white border rounded-md focus:outline-none focus:ring text-black"
+                onChange={handleChange}
+                placeholder={formData.email}
+              />
+            </div>
+
+            <div>
+              <label className="text-white" htmlFor="first_name">
+                Nombre :
+              </label>
+              <input
+                id="first_name"
+                type="text"
+                name="first_name"
+                className="block w-full px-4 py-2 mt-2 bg-white border  rounded-md focus:outline-none focus:ring text-black"
+                onChange={handleChange}
+                placeholder={formData.first_name}
+              />
+            </div>
+
+            <div>
+              <label className="text-white" htmlFor="last_name">
+                Apellido :
+              </label>
+              <input
+                id="last_name"
+                type="text"
+                name="last_name"
+                className="block w-full px-4 py-2 mt-2 bg-white border  rounded-md focus:outline-none focus:ring text-black"
+                onChange={handleChange}
+                placeholder={formData.last_name}
+              />
+            </div>
+
+            <div>
+              <label className="text-white dark:text-gray-200" htmlFor="role">
+                Rol :
+              </label>
+              <select
+                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white rounded-md  focus:outline-none focus:ring text-black"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                name="role"
+              >
+                <option value="true">Administrador</option>
+                <option value="false">Trabajador</option>
+              </select>
+            </div>
           </div>
-          <h2 className="text-center text-[24px] font-bold mb-4">Editar Producto</h2>
-          <label htmlFor="name" className="text-[18px]">
-            Nombre :
-          </label>
-          <input type="text" id="name" name="name" onChange={handleChange} value={formData.name} />
 
-          <label htmlFor="quantity" className="text-[18px]">
-            Cantidad :
-          </label>
-          <input type="number" id="quantity" name="quantity" onChange={handleChange} value={formData.quantity} />
-
-          <label htmlFor="price" className="text-[18px]">
-            Precio :
-          </label>
-          <input type="number" id="price" name="price" onChange={handleChange} value={formData.price} />
-          <label htmlFor="category" className="text-[18px]">
-            Categoria :
-          </label>
-          <input type="text" id="category" name="category" onChange={handleChange} value={formData.category} />
-
-          <label htmlFor="img" className="text-[18px]">
-            Link Imagen :
-          </label>
-          <input type="text" id="img" name="img" onChange={handleChange} value={formData.img} />
-
-          <button
-            className="btn bg-info-600 border-none text-white text-[18px] rounded-[5px]
-              cursor-pointer pl-[7px] pr-[15px] mt-[20px] justify-center"
-          >
-            Submit
-          </button>
+          <div className="flex justify-between mt-6">
+            <button
+              className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-success rounded-md 
+            hover:bg-pink-700 focus:outline-none focus:bg-success-850"
+            >
+              Guardar
+            </button>
+            <button
+              className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-danger rounded-md 
+            hover:bg-pink-700 focus:outline-none focus:bg-danger-850"
+              onClick={buttonHandler}
+            >
+              Cancelar
+            </button>
+          </div>
         </form>
-      </div>
+      </section>
+      <ToastContainer />
     </div>
   );
 };

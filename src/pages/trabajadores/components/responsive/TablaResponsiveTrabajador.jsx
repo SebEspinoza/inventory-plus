@@ -9,40 +9,40 @@ import { IoIosAddCircle } from "react-icons/io";
 import FormAgregar from "../FormAgregar";
 import FormEditar from "../FormEditar";
 
-const url = "https://inventoryplus.cyclic.app/products";
+const url = "https://inventoryplus.cyclic.app/users";
 
-const TablaResponsive = () => {
-  const [products, setProducts] = useState([]);
+const TablaResponsiveTrabajador = () => {
+  const [workers, setWorkers] = useState([]);
   const [visibleForm, setVisibleForm] = useState(false);
   const [visibleEdit, setVisibleEdit] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [formDataEdit, setFormDataEdit] = useState({
     _id: "",
-    name: "",
-    quantity: 0,
-    price: 0,
-    category: "",
-    img: "",
-    date_of_expiry: null,
+    username: "",
+    password: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    role: Boolean,
   });
 
   const handleSearchInputChange = (e) => {
     setSearchInput(e.target.value);
   };
 
-  const filteredProducts = products.filter((product) => product.name.toLowerCase().includes(searchInput.toLowerCase()));
+  const filteredWorkers = workers.filter((worker) => worker.first_name.toLowerCase().includes(searchInput.toLowerCase()));
 
   const toggleBodyOverflow = (shouldHideOverflow) => {
     document.body.style.overflow = shouldHideOverflow ? "hidden" : "auto";
   };
 
-  const getProducts = async () => {
+  const getWorkers = async () => {
     const respuesta = await axios.get(url);
-    setProducts(respuesta.data);
+    setWorkers(respuesta.data);
   };
 
   useEffect(() => {
-    getProducts();
+    getWorkers();
   }, []);
 
   const toggleSeccion = (type) => {
@@ -59,21 +59,21 @@ const TablaResponsive = () => {
     }
   };
 
-  const handleProductoAgregado = () => {
-    getProducts();
+  const handleWorkerAgregado = () => {
+    getWorkers();
     toggleSeccion(1);
     addToast();
   };
 
-  const handleProductoEditado = (product) => {
-    setFormDataEdit(product);
-    getProducts();
+  const handleWorkerEditado = (worker) => {
+    setFormDataEdit(worker);
+    getWorkers();
     toggleSeccion(2);
   };
 
-  const handleProductoEliminado = async (id) => {
+  const handleWorkerEliminado = async (id) => {
     const result = await Swal.fire({
-      title: "¿Seguro que deseas eliminar este producto?",
+      title: "¿Seguro que deseas eliminar este trabajador?",
       text: "Este paso no se puede revertir",
       icon: "warning",
       showCancelButton: true,
@@ -88,17 +88,17 @@ const TablaResponsive = () => {
       try {
         await axios.delete(url + "/" + id);
         deleteSucces();
-        getProducts();
+        getWorkers();
       } catch (error) {
-        console.error("Error al eliminar el producto", error);
-        Swal.fire("Error", "Ocurrió un error al eliminar el producto", "error");
+        console.error("Error al eliminar el trabajador", error);
+        Swal.fire("Error", "Ocurrió un error al eliminar el trabajador", "error");
       }
     }
   };
 
   // Toast
   const deleteSucces = () => {
-    toast.error("Producto Eliminado", {
+    toast.error("Trabajador Eliminado", {
       position: "top-right",
       autoClose: 1000,
       hideProgressBar: false,
@@ -111,7 +111,7 @@ const TablaResponsive = () => {
   };
 
   const addToast = () => {
-    toast.success("Producto agregado!", {
+    toast.success("Trabajador agregado!", {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -123,9 +123,17 @@ const TablaResponsive = () => {
     });
   };
 
+  const handleRole = (role) => {
+    if (role === true) {
+      return "Administrador";
+    } else {
+      return "Trabajador";
+    }
+  };
+
   return (
     <div className="container-table">
-      <h2 className="text-5xl text-color-crema underline mb-4 w-full text-center">Productos</h2>
+      <h2 className="text-5xl text-color-crema underline mb-4 w-full text-center">Trabajadores</h2>
       <div className="dataTable ">
         <div className="search flex justify-between mb-4 p-2">
           <div className=" flex items-center gap-1">
@@ -141,36 +149,26 @@ const TablaResponsive = () => {
         <table className="bg-none">
           <thead></thead>
           <tbody className="bg-transparent">
-            {filteredProducts.length === 0 ? (
+            {filteredWorkers.length === 0 ? (
               <tr>
                 <td colSpan="7" className="text-center text-md text-color-crema bg-color-cafe-claro shadow-neumorphicTr mb-6 rounded-md">
-                  No existen productos o producto no encontrado.
+                  No existen trabajadores o trabajador no encontrado.
                 </td>
               </tr>
             ) : (
-              filteredProducts.map((product, i) => (
-                <tr key={product._id} className="text-center text-md text-color-crema bg-color-cafe-claro shadow-neumorphicTr mb-6 rounded-md">
-                  <td data-label={"#"}>{i + 1}</td>
-                  <td data-label={"Nombre:"}>{product.name}</td>
-                  <td data-label={"Cantidad:"}>{product.quantity}</td>
-                  <td data-label={"Precio:"}>${new Intl.NumberFormat("es-cl").format(product.price)}</td>
-                  <td data-label={"Categoria:"}>{product.category}</td>
-                  {product.category === "Alimento" ? (
-                    <td data-label={"Fecha vencimiento:"}>{product.date_of_expiry.toString().split("T")[0]}</td>
-                  ) : null}
-
-                  <td className="flex justify-center">
-                    {product.img.startsWith("data:image") ? (
-                      <img src={product.img} alt={product.name} className="h-24 w-24 object-cover rounded-full border border-color-crema" />
-                    ) : (
-                      <img src={product.img} alt={product.name} className="h-24 w-24 object-cover rounded-full border border-color-crema" />
-                    )}
-                  </td>
+              filteredWorkers.map((worker, i) => (
+                <tr key={worker._id} className="text-center text-md text-color-crema bg-color-cafe-claro shadow-neumorphicTr mb-6 rounded-md">
+                  <td data-label={"Nro"}>{i + 1}</td>
+                  <td data-label={"Nombre de usuario:"}>{worker.username}</td>
+                  <td data-label={"Email:"}>{worker.email}</td>
+                  <td data-label={"Nombre:"}>{worker.first_name}</td>
+                  <td data-label={"Apellido:"}>{worker.last_name}</td>
+                  <td data-label={"Rol:"}>{handleRole(worker.role)}</td>
                   <td className="flex justify-center">
                     <button
                       className="bg-warning text-black px-3 py-1 rounded-[5px] mr-1 ml-1"
                       onClick={() => {
-                        handleProductoEditado(product);
+                        handleWorkerEditado(worker);
                       }}
                     >
                       <FaEdit size={25} />
@@ -178,7 +176,7 @@ const TablaResponsive = () => {
                     <button
                       className="bg-danger text-white px-3 py-1 rounded-[5px] mr-1 ml-1"
                       onClick={() => {
-                        handleProductoEliminado(product._id);
+                        handleWorkerEliminado(worker._id);
                       }}
                     >
                       <FaTrashAlt size={25} />
@@ -191,9 +189,9 @@ const TablaResponsive = () => {
         </table>
       </div>
       {/* Form Agregar */}
-      {visibleForm && <FormAgregar onClose={() => toggleSeccion(1)} onProductoAgregado={handleProductoAgregado} />}
+      {visibleForm && <FormAgregar onClose={() => toggleSeccion(1)} onWorkerAgregado={handleWorkerAgregado} />}
       {/* Form Editar */}
-      {visibleEdit && <FormEditar onClose={() => toggleSeccion(2)} onProductoEditado={handleProductoEditado} rest={formDataEdit} />}
+      {visibleEdit && <FormEditar onClose={() => toggleSeccion(2)} onWorkerEditado={handleWorkerEditado} rest={formDataEdit} />}
       <div className="md:hidden w-full right-0 bottom-0 z-10 sticky flex justify-end pb-4 mx-0">
         <button className="rounded-full text-color-crema" onClick={() => toggleSeccion(1)}>
           <IoIosAddCircle size={50} />
@@ -204,4 +202,4 @@ const TablaResponsive = () => {
   );
 };
 
-export default TablaResponsive;
+export default TablaResponsiveTrabajador;

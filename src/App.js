@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
-import Analytics from "./pages/Analytics";
+import Estimaciones from "./pages/Estimaciones";
+import Dashboard from "./pages/Dashboard";
 import Trabajadores from "./pages/trabajadores/Trabajadores";
 import Unauthorized from "./pages/Unauthorized";
 import Inventario from "./pages/Inventario/Inventario";
@@ -11,15 +12,16 @@ import RequiredAuth from "./components/RequiredAuth";
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<RootLayout />}>
+      <Route element={<RootLayout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/inventario" element={<Inventario />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
         <Route element={<RequiredAuth allowedRoles={true} />}>
           <Route path="/trabajadores" element={<Trabajadores />} />
-          <Route path="/Estadísticas/:aID" element={<Analytics />} />
+          <Route path="/estimaciones" element={<Estimaciones />} />
         </Route>
       </Route>
     </Routes>

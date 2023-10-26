@@ -1,22 +1,25 @@
 // React imports
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 // Extra imports
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 
-// Componentes
-import SubMenu from "./SubMenu";
 // React icons
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { BsPerson, BsBoxSeam } from "react-icons/bs";
 import { TbReportAnalytics } from "react-icons/tb";
 import { MdArrowForwardIos } from "react-icons/md";
+import { MdAutoGraph } from "react-icons/md";
 import Logo from "../../assets/Logo.png";
 // Auth
 
 const Sidebar = () => {
+  const state = useSelector((state) => state.UserReducer);
+  const [username, setUsername] = useState("Nombre de usuario");
+  const [userType, setUserType] = useState("Tipo de usuario");
   // Estado del sidebar
   const [isOpen, setIsOpen] = useState(true);
   const go = useNavigate();
@@ -71,18 +74,21 @@ const Sidebar = () => {
     }
   }, [isTab]);
 
+  useEffect(() => {
+    if (state.user) {
+      setUsername(state.user.data);
+      if (state.user.type == true) {
+        setUserType("Administrador");
+      } else {
+        setUserType("Trabajador");
+      }
+    }
+  }, []);
+
   // Al cambiar el pathname -> cierra el sidebar
   useEffect(() => {
     isTab && setIsOpen(false);
   }, [pathname, isTab]);
-
-  const subMenusList = [
-    {
-      name: "Estadísticas",
-      icon: TbReportAnalytics,
-      menus: ["Dashboard", "Estimaciones"],
-    },
-  ];
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -133,25 +139,26 @@ const Sidebar = () => {
                 Inventario
               </NavLink>
             </li>
-
-            {/* SubMenu */}
-            {isOpen && (
-              <div className="border-y py-5 border-slate-300">
-                {subMenusList.map((menu) => (
-                  <div key={menu.name} className="flex flex-col gap-1">
-                    <SubMenu data={menu} />
-                  </div>
-                ))}
-              </div>
-            )}
+            <li>
+              <NavLink to={"/dashboard"} className="link">
+                <TbReportAnalytics size={23} className="min-w-max" />
+                Dashboard
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/estimaciones"} className="link">
+                <MdAutoGraph size={23} className="min-w-max" />
+                Estimaciones
+              </NavLink>
+            </li>
           </ul>
           {/*Segundo */}
           {isOpen && (
             <div className="flex-1 text-md z-50 max-h-48 my-auto whitespace-pre w-full font-medium">
               <div className="flex items-center justify-between border-y border-slate-300 p-2">
                 <div>
-                  <p>Nombre Usuario</p>
-                  <small>Tipo de Usuario</small>
+                  <p>{username}</p>
+                  <small>{userType}</small>
                 </div>
                 <button className="text-color-crema py-1.5 px-3 text-xs bg-danger rounded-xl shadow-neumorphicLogOutButton" onClick={handleLogout}>
                   Cerrar Sesión
