@@ -56,7 +56,7 @@ const FormAgregar = (props) => {
         <div className="close-btn flex justify-end items-center rounded-[20px] cursor-pointer text-danger-600">
           <RiCloseCircleLine onClick={closeButtonHandler} size={25} />
         </div>
-        <h1 className="text-xl font-bold text-white capitalize dark:text-white">Agregar Producto</h1>
+        <h1 className="text-xl font-bold text-white capitalize dark:text-white">Agregar Trabajador</h1>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 gap-6 mt-8 sm:grid-cols-2">
             <div>

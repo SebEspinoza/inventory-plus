@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 // Extra imports
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
+import Swal from "sweetalert2";
 
 // React icons
 import { IoIosArrowBack } from "react-icons/io";
@@ -90,9 +91,28 @@ const Sidebar = () => {
     isTab && setIsOpen(false);
   }, [pathname, isTab]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    go("/login");
+  const handleLogout = async () => {
+    const result = await Swal.fire({
+      title: "¿Seguro que deseas cerrar tu sesión?",
+      text: "No podras acceder al sitio si no estas logueado",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      background: "#fff0c9",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Cerrar sesión",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        localStorage.removeItem("persist:main-root");
+        go("/login");
+      } catch (error) {
+        console.error("Error al cerrar sesión", error);
+        Swal.fire("Error", "Ocurrió un error al cerrar sesión ", "error");
+      }
+    }
   };
 
   return (

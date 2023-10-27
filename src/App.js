@@ -14,10 +14,13 @@ const App = () => {
     <Routes>
       <Route element={<RootLayout />}>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/inventario" element={<Inventario />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route element={<RequiredAuth allowedRoles={false || true} />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/inventario" element={<Inventario />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
 
         <Route element={<RequiredAuth allowedRoles={true} />}>
           <Route path="/trabajadores" element={<Trabajadores />} />
