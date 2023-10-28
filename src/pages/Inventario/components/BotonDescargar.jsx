@@ -7,8 +7,16 @@ import { BiSolidDownload } from "react-icons/bi";
 const BotonDescargar = ({ data = [], fileName }) => {
   // Función para eliminar la propiedad _id y __v de cada objeto
   const cleanData = data.map((item) => {
-    const { _id, __v, name, quantity, price, category, date_of_expiry, img, ...rest } = item;
-    return { Producto: name, Cantidad: quantity, Precio: price, Categoria: category, FechaDeCaducidad: date_of_expiry, ...rest };
+    const { _id, __v, name, quantity, price, category, date_of_expiry, date_added, img, ...rest } = item;
+    return {
+      Producto: name,
+      Cantidad: quantity,
+      Precio: price,
+      Categoria: category,
+      FechaDeCaducidad: date_of_expiry,
+      FechaDeIngreso: date_added,
+      ...rest,
+    };
   });
   return (
     <button

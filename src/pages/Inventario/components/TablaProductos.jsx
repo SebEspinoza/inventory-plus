@@ -87,8 +87,19 @@ const TablaProductos = () => {
       header: "Categoria",
     }),
     columnHelper.accessor("date_of_expiry", {
+      cell: (info) => {
+        const category = info.row.original.category;
+        if (category === "Insumos") {
+          return <span>Sin fecha de vencimiento</span>;
+        } else {
+          return <span>{info.getValue().toString().split("T")[0]}</span>;
+        }
+      },
+      header: "Fecha de vencimiento",
+    }),
+    columnHelper.accessor("date_added", {
       cell: (info) => <span>{info.getValue().toString().split("T")[0]}</span>,
-      header: "Fecha de caducidad",
+      header: "Fecha de ingreso",
     }),
     columnHelper.accessor("botones", {
       cell: (info) => (
@@ -230,7 +241,7 @@ const TablaProductos = () => {
               table.getRowModel().rows.map((row, i) => (
                 <tr key={row.id} className={`${i % 2 === 0 ? "bg-mocha" : "bg-color-cafe-claro-600"}`}>
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="px-3.5 py-2">
+                    <td key={cell.id} className="pl-3 py-2">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>
                   ))}

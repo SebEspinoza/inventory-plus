@@ -158,6 +158,7 @@ const TablaResponsive = () => {
                   {product.category === "Alimento" ? (
                     <td data-label={"Fecha vencimiento:"}>{product.date_of_expiry.toString().split("T")[0]}</td>
                   ) : null}
+                  <td data-label={"Fecha Ingreso:"}>{product.date_added.toString().split("T")[0]}</td>
 
                   <td className="flex justify-center">
                     {product.img.startsWith("data:image") ? (

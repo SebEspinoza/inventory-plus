@@ -22,7 +22,7 @@ const Sidebar = () => {
   const [username, setUsername] = useState("Nombre de usuario");
   const [userType, setUserType] = useState("Tipo de usuario");
   // Estado del sidebar
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const go = useNavigate();
 
   let isTab = useMediaQuery({
@@ -71,7 +71,7 @@ const Sidebar = () => {
       // Mobile
       setIsOpen(false);
     } else {
-      setIsOpen(true);
+      setIsOpen(false);
     }
   }, [isTab]);
 
@@ -85,11 +85,6 @@ const Sidebar = () => {
       }
     }
   }, []);
-
-  // Al cambiar el pathname -> cierra el sidebar
-  useEffect(() => {
-    isTab && setIsOpen(false);
-  }, [pathname, isTab]);
 
   const handleLogout = async () => {
     const result = await Swal.fire({
