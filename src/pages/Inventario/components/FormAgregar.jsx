@@ -146,7 +146,7 @@ const FormAgregar = (props) => {
             {selectedCategory !== "Insumos" && (
               <div className="text-black">
                 <label className="text-white" htmlFor="date_of_expiry">
-                  Fecha :
+                  Fecha de caducidad:
                 </label>
                 <input
                   id="date_of_expiry"

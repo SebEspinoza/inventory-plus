@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import Estimaciones from "./pages/Estimaciones";
 import Dashboard from "./pages/Dashboard";
 import Trabajadores from "./pages/trabajadores/Trabajadores";
@@ -16,13 +16,13 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
 
-        <Route element={<RequiredAuth allowedRoles={false || true} />}>
+        <Route element={<RequiredAuth allowedRoles={[true, false]} />}>
           <Route path="/" element={<Home />} />
           <Route path="/inventario" element={<Inventario />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
 
-        <Route element={<RequiredAuth allowedRoles={true} />}>
+        <Route element={<RequiredAuth allowedRoles={[true]} />}>
           <Route path="/trabajadores" element={<Trabajadores />} />
           <Route path="/estimaciones" element={<Estimaciones />} />
         </Route>

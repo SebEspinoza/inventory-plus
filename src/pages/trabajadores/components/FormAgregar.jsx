@@ -21,7 +21,7 @@ const FormAgregar = (props) => {
     e.preventDefault();
     const data = await axios.post(url, formData);
     console.log(data);
-    props.onProductoAgregado();
+    props.onWorkerAgregado();
   };
 
   const handleChange = (e) => {

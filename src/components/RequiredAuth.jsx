@@ -5,14 +5,10 @@ const RequireAuth = ({ allowedRoles }) => {
   const state = useSelector((state) => state.UserReducer);
   const location = useLocation();
 
-  if (state.user !== null && state.user.type !== null) {
-    return state.user.type === allowedRoles ? (
-      <Outlet />
-    ) : state.user.userName ? (
-      <Navigate to="/unauthorized" state={{ from: location }} replace />
-    ) : (
-      <Navigate to="/login" state={{ from: location }} replace />
-    );
+  if (state.user !== null && allowedRoles.includes(state.user.type)) {
+    return <Outlet />;
+  } else if (state.user !== null) {
+    return <Navigate to="/unauthorized" state={{ from: location }} replace />;
   } else {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }

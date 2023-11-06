@@ -1,6 +1,6 @@
 import React from "react";
 import { TbCalendar } from "react-icons/tb";
-import Chart from "../components/Chart";
+import Chart from "./components/Chart";
 
 const Home = () => {
   return (

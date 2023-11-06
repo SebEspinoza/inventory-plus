@@ -214,9 +214,9 @@ const TablaTrabajadores = () => {
             Agregar
           </button>
           {/* Form Agregar */}
-          {visibleForm && <FormAgregar onClose={() => toggleSeccion(1)} onProductoAgregado={handleTrabajadorAgregado} />}
+          {visibleForm && <FormAgregar onClose={() => toggleSeccion(1)} onWorkerAgregado={handleTrabajadorAgregado} />}
           {/* Form Editar */}
-          {visibleEdit && <FormEditar onClose={() => toggleSeccion(2)} onProductoEditado={handleTrabajadorEditado} rest={formDataEdit} />}
+          {visibleEdit && <FormEditar onClose={() => toggleSeccion(2)} onWorkerEditado={handleTrabajadorEditado} rest={formDataEdit} />}
         </div>
         {/*Tabla */}
         <table className="w-full text-left">
