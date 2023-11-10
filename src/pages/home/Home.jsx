@@ -1,5 +1,4 @@
 import React from "react";
-import { TbCalendar } from "react-icons/tb";
 import Chart from "./components/Chart";
 
 const Home = () => {
@@ -16,7 +15,7 @@ const Home = () => {
             </h3>
           </div>
 
-          <div className="dropdown items-center cursor-pointer mt-5 mb-5 lg:mt-0 lg:mb-0 relative z-0">
+          {/*<div className="dropdown items-center cursor-pointer mt-5 mb-5 lg:mt-0 lg:mb-0 relative z-0">
             <i className="absolute left-[1px]  top-[55%] transform -translate-y-1/2 w-5 h-5  lg:top-1/2 lg:left-2 ">
               <TbCalendar size={18} className="fill-color-crema" />
             </i>
@@ -30,7 +29,7 @@ const Home = () => {
               <option value="">Ultimos 3 meses</option>
               <option value="">Ultimos 6 meses</option>
             </select>
-          </div>
+          </div> */}
         </div>
         <Chart />
       </div>

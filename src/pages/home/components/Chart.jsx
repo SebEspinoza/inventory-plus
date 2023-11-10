@@ -9,14 +9,16 @@ const Chart = () => {
     background: "#ffffff",
     borderRadius: "10px",
   };
-  const classNamePieChart = "md:w-[680px] md:h-[480px] w-[380px] h-[340px]";
+  const classNamePieChart = "md:w-[550px] md:h-[480px] w-[380px] h-[340px]";
   return (
-    <div className="w-full">
-      <div className="w-full flex flex-col items-center md:flex-row md:items-baseline md:flex-wrap">
+    <div className="w-full mt-4 ">
+      <div className="grid grid-cols-1 gap-2 overflow-hidden place-items-center lg:flex lg:flex-row lg:flex-wrap lg:justify-around lg:place-items-start">
         <img src={Lineas} alt="Lineas" />
         <PieChart2 style={estilo2} classN={classNamePieChart} />
         <img src={Productos} alt="Products" />
-        <WorkersList />
+        <div className="w-full lg:w-fit">
+          <WorkersList />
+        </div>
       </div>
     </div>
   );
