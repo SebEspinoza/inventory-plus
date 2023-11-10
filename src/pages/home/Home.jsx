@@ -5,7 +5,7 @@ import Chart from "./components/Chart";
 const Home = () => {
   return (
     <div>
-      <div className="flex-grow p-4">
+      <div className="flex-grow md:p-4 p-1">
         <div className="parteSuperior flex lg:flex-row flex-col items-center justify-between mt-5">
           <div className="textoSuperior flex lg:flex-row  flex-col items-center">
             <h1 className="font-OpenSans font-bold lg:text-[32px] lg:leading-[48px] text-[32px] leading-[30px] text-center text-color-cafe-oscuro">

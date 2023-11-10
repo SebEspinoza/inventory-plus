@@ -6,7 +6,7 @@ const PieChart1 = (props) => {
     <Iframe
       styles={props.style}
       className={props.classN}
-      src="https://charts.mongodb.com/charts-project-0-sgcwj/embed/charts?id=653c49ee-410d-4fda-8b40-05e6f3eeabda&maxDataAge=180&theme=dark&autoRefresh=true"
+      src="https://charts.mongodb.com/charts-project-0-sgcwj/embed/charts?id=653c49ee-410d-4fda-8b40-05e6f3eeabda&maxDataAge=180&theme=light&autoRefresh=true"
     />
   );
 };

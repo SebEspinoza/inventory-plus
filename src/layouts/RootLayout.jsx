@@ -12,7 +12,7 @@ const RootLayout = () => {
   return (
     <div className={divClass}>
       {!isLoginPage && <Sidebar />}
-      <main className="max-w-5xl flex-1 mx-auto md:py-4">
+      <main className="max-w-6xl flex-1 mx-auto md:py-4">
         <Outlet />
       </main>
     </div>
