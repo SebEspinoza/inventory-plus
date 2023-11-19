@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/inventory-plus/static/css/main.bb4bb591.css",
-    "main.js": "/inventory-plus/static/js/main.e4af477a.js",
+    "main.js": "/inventory-plus/static/js/main.fa54efa9.js",
     "static/js/787.7d3d693b.chunk.js": "/inventory-plus/static/js/787.7d3d693b.chunk.js",
     "static/media/Productos.png": "/inventory-plus/static/media/Productos.ec1d1a71c9345205597c.png",
     "static/media/Lineas.png": "/inventory-plus/static/media/Lineas.35a813a8432ece2bf235.png",
     "index.html": "/inventory-plus/index.html",
     "main.bb4bb591.css.map": "/inventory-plus/static/css/main.bb4bb591.css.map",
-    "main.e4af477a.js.map": "/inventory-plus/static/js/main.e4af477a.js.map",
+    "main.fa54efa9.js.map": "/inventory-plus/static/js/main.fa54efa9.js.map",
     "787.7d3d693b.chunk.js.map": "/inventory-plus/static/js/787.7d3d693b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bb4bb591.css",
-    "static/js/main.e4af477a.js"
+    "static/js/main.fa54efa9.js"
   ]
 }
