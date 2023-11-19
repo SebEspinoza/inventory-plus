@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./context/AuthProvider";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, HashRouter } from "react-router-dom";
 import store, { Persistor } from "./store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -14,13 +14,13 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={Persistor}>
-        <BrowserRouter basename="/inventory-plus">
+        <HashRouter basename="/">
           <AuthProvider>
             <Routes>
               <Route path="/*" element={<App />} />
             </Routes>
           </AuthProvider>
-        </BrowserRouter>
+        </HashRouter>
       </PersistGate>
     </Provider>
   </React.StrictMode>
