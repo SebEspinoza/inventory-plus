@@ -3,7 +3,7 @@ import { RiCloseCircleLine } from "react-icons/ri";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
-const url = "https://inventoryplus.cyclic.app/products";
+const url = "https://inventoryplusbackend.onrender.com/products";
 
 const formatDate = (date) => {
   if (date) {

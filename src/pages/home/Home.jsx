@@ -2,7 +2,7 @@ import React from "react";
 import Chart from "./components/Chart";
 
 const getCurrentDate = () => {
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
 
   const currentDate = new Date();
   const month = months[currentDate.getMonth()];

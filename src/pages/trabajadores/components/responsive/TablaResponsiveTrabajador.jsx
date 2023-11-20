@@ -9,7 +9,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import FormAgregar from "../FormAgregar";
 import FormEditar from "../FormEditar";
 
-const url = "https://inventoryplus.cyclic.app/users";
+const url = "https://inventoryplusbackend.onrender.com/users";
 
 const TablaResponsiveTrabajador = () => {
   const [workers, setWorkers] = useState([]);

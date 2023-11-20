@@ -17,7 +17,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Log from "../components/Log";
 
 //url API
-const url = "https://inventoryplus.cyclic.app/products";
+const url = "https://inventoryplusbackend.onrender.com/products";
 
 const TablaProductos = () => {
   const columnHelper = createColumnHelper();

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LogCard from "./LogCard";
 
-const url = "https://inventoryplus.cyclic.app/";
+const url = "https://inventoryplusbackend.onrender.com/";
 
 const LogViewer = () => {
   const [logs, setLogs] = useState([]);

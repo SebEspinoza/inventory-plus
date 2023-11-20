@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import axios from "axios";
 
-const url = "https://inventoryplus.cyclic.app/products";
+const url = "https://inventoryplusbackend.onrender.com/products";
 
 const FormAgregar = (props) => {
   const [visibleForm] = useState(false);

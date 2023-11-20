@@ -16,7 +16,7 @@ import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 
 //url API
-const url = "https://inventoryplus.cyclic.app/users";
+const url = "https://inventoryplusbackend.onrender.com/users";
 
 const TablaTrabajadores = () => {
   const columnHelper = createColumnHelper();
