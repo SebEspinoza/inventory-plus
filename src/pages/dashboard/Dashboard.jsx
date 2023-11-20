@@ -2,7 +2,7 @@ import React from "react";
 import PieChart1 from "../../components/PieChart.jsx";
 import BarChart from "../../components/BarChart.jsx";
 import ColumnChart from "../../components/ColumnChart.jsx";
-import Log from "./components/Log.jsx";
+import { BarChart2 } from "../../components/BarChart.jsx";
 
 const Dashboard = () => {
   const estilo1 = {
@@ -24,10 +24,8 @@ const Dashboard = () => {
       <div className="w-full flex flex-col items-center md:flex-row md:items-baseline md:flex-wrap bg-white rounded-md shadow-lg md:justify-evenly md:p-4">
         <PieChart1 style={estilo1} classN={classNamePieChart} />
         <BarChart style={estilo1} classN={classNameBarChart} />
+        <BarChart2 style={estilo1} classN={classNameBarChart} />
         <ColumnChart style={estilo1} classN={classColumnChart} />
-      </div>
-      <div className="mt-4">
-        <Log />
       </div>
     </div>
   );

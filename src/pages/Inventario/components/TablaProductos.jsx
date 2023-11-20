@@ -14,6 +14,7 @@ import FormAgregar from "././FormAgregar";
 import FormEditar from "./FormEditar";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
+import Log from "../components/Log";
 
 //url API
 const url = "https://inventoryplus.cyclic.app/products";
@@ -23,6 +24,7 @@ const TablaProductos = () => {
   const [products, setProducts] = useState([]);
   const [visibleForm, setVisibleForm] = useState(false);
   const [visibleEdit, setVisibleEdit] = useState(false);
+  const [historyVisible, setHistoryVisible] = useState(false);
   const [data, setData] = useState([]);
   const [formDataEdit, setFormDataEdit] = useState({
     _id: "",
@@ -198,132 +200,138 @@ const TablaProductos = () => {
   };
 
   return (
-    <div className="mb-4">
-      <div className="flex justify-center mb-10">
-        <h1 className="text-5xl underline text-color-crema">Productos</h1>
-      </div>
-      <div className="p-2 mx-auto  text-color-crema bg-color-cafe-claro rounded-lg shadow-neumorphicTable">
-        {/*Botones superiores*/}
-        <div className="flex  justify-between mb-4 p-2">
-          <div className="w-full flex items-center gap-1">
-            <BiSearchAlt size={20} />
-            <InputBuscar
-              value={globalFilter ?? ""}
-              onChange={(value) => setGlobalFilter(String(value))}
-              className="p-2 bg-transparent outline-none border-b-2 w-1/5 focus:w-1/3 duration-300 border-color-crema"
-              placeholder="Buscar..."
-            />
-          </div>
-          <button className="download-btn" onClick={() => toggleSeccion(1)}>
-            <IoIosAddCircle />
-            Agregar
-          </button>
-          {/* Form Agregar */}
-          {visibleForm && <FormAgregar onClose={() => toggleSeccion(1)} onProductoAgregado={handleProductoAgregado} />}
-          {/* Form Editar */}
-          {visibleEdit && <FormEditar onClose={() => toggleSeccion(2)} onProductoEditado={handleProductoEditado} rest={formDataEdit} />}
+    <>
+      <div className="mb-4">
+        <div className="flex justify-center mb-10">
+          <h1 className="text-5xl underline text-color-crema">Productos</h1>
         </div>
-        {/*Tabla */}
-        <table className="w-full text-left">
-          <thead className="bg-color-cafe-oscuro">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th className="capitalize px-3.5 py-2" key={header.id}>
-                    {flexRender(header.column.columnDef.header, header.getContext())}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.length ? (
-              table.getRowModel().rows.map((row, i) => (
-                <tr key={row.id} className={`${i % 2 === 0 ? "bg-mocha" : "bg-color-cafe-claro-600"}`}>
-                  {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="pl-3 py-2">
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
+        <div className="p-2 mx-auto  text-color-crema bg-color-cafe-claro rounded-lg shadow-neumorphicTable">
+          {/*Botones superiores*/}
+          <div className="flex  justify-between mb-4 p-2">
+            <div className="w-full flex items-center gap-1">
+              <BiSearchAlt size={20} />
+              <InputBuscar
+                value={globalFilter ?? ""}
+                onChange={(value) => setGlobalFilter(String(value))}
+                className="p-2 bg-transparent outline-none border-b-2 w-1/5 focus:w-1/3 duration-300 border-color-crema"
+                placeholder="Buscar..."
+              />
+            </div>
+            <button className="download-btn" onClick={() => toggleSeccion(1)}>
+              <IoIosAddCircle />
+              Agregar
+            </button>
+            {/* Form Agregar */}
+            {visibleForm && <FormAgregar onClose={() => toggleSeccion(1)} onProductoAgregado={handleProductoAgregado} />}
+            {/* Form Editar */}
+            {visibleEdit && <FormEditar onClose={() => toggleSeccion(2)} onProductoEditado={handleProductoEditado} rest={formDataEdit} />}
+          </div>
+          {/*Tabla */}
+          <table className="w-full text-left">
+            <thead className="bg-color-cafe-oscuro">
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <th className="capitalize px-3.5 py-2" key={header.id}>
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                    </th>
                   ))}
                 </tr>
-              ))
-            ) : (
-              <tr className="text-center h-32">
-                <td colSpan={12}>Producto No Encontrado!</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-        {/*Botones inferiores */}
-        <div className="flex flex-row justify-between mt-2 p-2">
-          <div className="flex items-start justify-start ">
-            <BotonDescargar data={data} fileName={`Stock ${fechaActual.toLocaleString()}`} />
-          </div>
-          {/*Paginacion*/}
-          <div className="flex items-start justify-end gap-2">
-            {/*Botones para cambiar de pagina */}
-            <button
-              onClick={() => {
-                table.previousPage();
-              }}
-              disabled={!table.getCanPreviousPage()}
-              className="p-1 border border-color-cafe-claro px-2 disabled:opacity-30"
-            >
-              {<IoIosArrowBack />}
-            </button>
-            <button
-              onClick={() => {
-                table.nextPage();
-              }}
-              disabled={!table.getCanNextPage()}
-              className="p-1 border border-color-cafe-claro px-2 disabled:opacity-30"
-            >
-              {<IoIosArrowForward />}
-            </button>
-            {/*Numero de pagina */}
-            <span className="flex items-center gap-1">
-              <div>Página</div>
-              <strong>
-                {table.getState().pagination.pageIndex + 1} de {""}
-                {table.getPageCount()}
-              </strong>
-            </span>
-            {/*Ir a una pagina en especifico */}
-            <span className="flex items-start gap-1">
-              - Ir a la página:
-              <input
-                type="number"
-                onWheel={(e) => {
-                  e.preventDefault();
-                }}
-                onChange={(e) => {
-                  const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                  table.setPageIndex(page);
-                }}
-                defaultValue={table.getState().pagination.pageIndex + 1}
-                className="border p-1 rounded bg-transparent w-14 h-6 
-              [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-              />
-            </span>
-            {/*Mostrar N productos */}
-            <select
-              value={table.getState().pagination.pageSize}
-              onChange={(e) => {
-                table.setPageSize(Number(e.target.value));
-              }}
-              className="p-[2px] bg-color-cafe-claro border-none text-color-crema w-25 h-6 text-sm"
-            >
-              {[10, 20, 30, 50].map((pageSize) => (
-                <option key={pageSize} value={pageSize}>
-                  Mostrar {pageSize}
-                </option>
               ))}
-            </select>
+            </thead>
+            <tbody>
+              {table.getRowModel().rows.length ? (
+                table.getRowModel().rows.map((row, i) => (
+                  <tr key={row.id} className={`${i % 2 === 0 ? "bg-mocha" : "bg-color-cafe-claro-600"}`}>
+                    {row.getVisibleCells().map((cell) => (
+                      <td key={cell.id} className="pl-3 py-2">
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : (
+                <tr className="text-center h-32">
+                  <td colSpan={12}>Producto No Encontrado!</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+          {/*Botones inferiores */}
+          <div className="flex flex-row justify-between mt-2 p-2">
+            <div className="flex items-start justify-start gap-2">
+              <BotonDescargar data={data} fileName={`Stock ${fechaActual.toLocaleString()}`} />
+              <button type="button" className="download-btn" onClick={() => setHistoryVisible(!historyVisible)}>
+                Historial
+              </button>
+            </div>
+            {/*Paginacion*/}
+            <div className="flex items-start justify-end gap-2">
+              {/*Botones para cambiar de pagina */}
+              <button
+                onClick={() => {
+                  table.previousPage();
+                }}
+                disabled={!table.getCanPreviousPage()}
+                className="p-1 border border-color-cafe-claro px-2 disabled:opacity-30"
+              >
+                {<IoIosArrowBack />}
+              </button>
+              <button
+                onClick={() => {
+                  table.nextPage();
+                }}
+                disabled={!table.getCanNextPage()}
+                className="p-1 border border-color-cafe-claro px-2 disabled:opacity-30"
+              >
+                {<IoIosArrowForward />}
+              </button>
+              {/*Numero de pagina */}
+              <span className="flex items-center gap-1">
+                <div>Página</div>
+                <strong>
+                  {table.getState().pagination.pageIndex + 1} de {""}
+                  {table.getPageCount()}
+                </strong>
+              </span>
+              {/*Ir a una pagina en especifico */}
+              <span className="flex items-start gap-1">
+                - Ir a la página:
+                <input
+                  type="number"
+                  onWheel={(e) => {
+                    e.preventDefault();
+                  }}
+                  onChange={(e) => {
+                    const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                    table.setPageIndex(page);
+                  }}
+                  defaultValue={table.getState().pagination.pageIndex + 1}
+                  className="border p-1 rounded bg-transparent w-14 h-6 
+              [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                />
+              </span>
+              {/*Mostrar N productos */}
+              <select
+                value={table.getState().pagination.pageSize}
+                onChange={(e) => {
+                  table.setPageSize(Number(e.target.value));
+                }}
+                className="p-[2px] bg-color-cafe-claro border-none text-color-crema w-25 h-6 text-sm"
+              >
+                {[10, 20, 30, 50].map((pageSize) => (
+                  <option key={pageSize} value={pageSize}>
+                    Mostrar {pageSize}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
-      <ToastContainer />
-    </div>
+      {historyVisible && <Log onClose={() => setHistoryVisible(false)} />}
+    </>
   );
 };
 
