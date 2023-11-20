@@ -8,10 +8,13 @@ import { Route, Routes, HashRouter } from "react-router-dom";
 import store, { Persistor } from "./store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import * as serviceWorker from "./serviceworker";
+import PWAPrompt from 'react-ios-pwa-prompt'
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+
     <Provider store={store}>
       <PersistGate loading={null} persistor={Persistor}>
         <HashRouter basename="/">
@@ -23,6 +26,7 @@ root.render(
         </HashRouter>
       </PersistGate>
     </Provider>
+
   </React.StrictMode>
 );
 
@@ -30,3 +34,4 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+serviceWorker.register();
