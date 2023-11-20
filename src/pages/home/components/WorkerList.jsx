@@ -28,7 +28,7 @@ const WorkersList = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 ms-0 me-0 bg-white shadow-lg rounded-md h-full lg:h-[660px] lg:overflow-y-scroll">
+    <div className="container mx-auto p-6 ms-0 me-0 bg-white shadow-lg rounded-md h-full lg:h-[660px] lg:overflow-y-hidden">
       <div className="flex mb-4 justify-between">
         <div className="font-bold text-lg">Personal</div>
         <button className="bg-color-cafe-claro hover:bg-rojizo text-white font-bold py-2 px-4 rounded" onClick={redirect}>

@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LogCard from "./LogCard";
 
-const url = "https://inventoryplus.cyclic.app/logProducts";
+const url = "https://inventoryplus.cyclic.app/";
 
 const LogViewer = () => {
-  const [logs, setLogs] = useState([]);
+  const [logsEvening, setLogsEvening] = useState([]);
+  const [logsMorning, setLogsMorning] = useState([]);
   const [selectedLog, setSelectedLog] = useState(null);
+
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     const year = date.getFullYear();
@@ -19,16 +21,23 @@ const LogViewer = () => {
   };
 
   useEffect(() => {
-    // Realiza la solicitud a la API para obtener los logs usando Axios
     axios
-      .get(url)
-      .then((response) => setLogs(response.data))
-      .catch((error) => console.error("Error fetching logs:", error));
-  }, []); // El segundo parámetro [] asegura que useEffect solo se ejecute una vez al montar el componente
+      .get(url + "logProductsEvening")
+      .then((response) => setLogsEvening(response.data))
+      .catch((error) => console.error("Error fetching evening logs:", error));
+  }, []);
 
-  const handleLogClick = (logId) => {
+  useEffect(() => {
+    axios
+      .get(url + "logProductsMorning")
+      .then((response) => setLogsMorning(response.data))
+      .catch((error) => console.error("Error fetching morning logs:", error));
+  }, []);
+
+  const handleLogClick = (logId, logType) => {
     // Si el log seleccionado es el mismo, cerrarlo. Si es diferente, abrir el nuevo log.
-    setSelectedLog((prevLog) => (prevLog && prevLog._id === logId ? null : logs.find((log) => log._id === logId)));
+    const selectedLogs = logType === "morning" ? logsMorning : logsEvening;
+    setSelectedLog((prevLog) => (prevLog && prevLog._id === logId ? null : selectedLogs.find((log) => log._id === logId)));
   };
 
   const handleCloseLog = () => {
@@ -38,17 +47,30 @@ const LogViewer = () => {
   return (
     <div className="bg-white rounded-md">
       <h2 className="text-4xl text-center">Historial de inventarios</h2>
-      <ul className="m-2">
-        {logs.map((log, i) => (
-          <li key={log._id} onClick={() => handleLogClick(log._id)} className="shadow-md hover:bg-color-crema m-2 text-lg pb-2">
-            {i + 1}- Historial inventario del dia: {formatDate(log.timestamp)}
-          </li>
-        ))}
-      </ul>
+      <div className="flex">
+        {/* Logs Morning */}
+        <ul className="flex-1 m-2">
+          <h3 className="text-center text-2xl underline">Inventario 9:00 AM</h3>
+          {logsMorning.map((log, i) => (
+            <li key={log._id} onClick={() => handleLogClick(log._id, "morning")} className="shadow-md hover:bg-color-crema m-2 text-lg pb-2">
+              {i + 1}- Historial inventario del día: {formatDate(log.timestamp)}
+            </li>
+          ))}
+        </ul>
+        {/* Logs Evening */}
+        <ul className="flex-1 m-2">
+          <h3 className="text-center text-2xl underline">Inventario 20:00 PM</h3>
+          {logsEvening.map((log, i) => (
+            <li key={log._id} onClick={() => handleLogClick(log._id, "evening")} className="shadow-md hover:bg-color-crema m-2 text-lg pb-2">
+              {i + 1}- Historial inventario del día: {formatDate(log.timestamp)}
+            </li>
+          ))}
+        </ul>
+      </div>
       {selectedLog && (
         <div>
           <div className="grid grid-cols-1 grid-rows-2">
-            <h3 className="text-center text-2xl underline">Detalles del Log dia {formatDate(selectedLog.timestamp)}</h3>
+            <h3 className="text-center text-2xl underline">Detalles del Log día {formatDate(selectedLog.timestamp)}</h3>
             <button onClick={handleCloseLog} className="bg-danger rounded-md text-sm px-2 py-2 w-[8rem] text-center text-white uppercase m-auto">
               Cerrar Log
             </button>
