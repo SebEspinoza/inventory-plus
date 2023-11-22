@@ -16,18 +16,18 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
 
-        <Route element={<RequiredAuth allowedRoles={[true, false]} />}>
+        <Route>
           <Route path="/" element={<Home />} />
           <Route path="/inventario" element={<Inventario />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
 
-        <Route element={<RequiredAuth allowedRoles={[true]} />}>
+        <Route>
           <Route path="/trabajadores" element={<Trabajadores />} />
           <Route path="/estimaciones" element={<Estimaciones />} />
         </Route>
       </Route>
-    </Routes>
+    </Routes >
   );
 };
 

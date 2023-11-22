@@ -74,7 +74,7 @@ const TablaTrabajadores = () => {
     }),
     columnHelper.accessor("role", {
       cell: (info) => {
-        if (info.getValue() === true) {
+        if (info.getValue()[0].role === true) {
           return <span>Administrador</span>;
         } else {
           return <span>Trabajador</span>;
