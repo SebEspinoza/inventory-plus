@@ -15,7 +15,7 @@ const FormEditar = (props) => {
     email: props.rest.email || "",
     first_name: props.rest.first_name || "",
     last_name: props.rest.last_name || "",
-    role: { role: Boolean(selectedCategory) },
+    role: props.rest.role || Boolean,
   });
 
   const handleChange = (e) => {
@@ -57,25 +57,12 @@ const FormEditar = (props) => {
     const selectedValue = e.target.value;
 
     setSelectedCategory(selectedValue);
-    if (selectedValue === false) {
-      setFormData((prev) => {
-        return {
-          ...prev,
-          role: {
-            role: false,
-          },
-        };
-      });
-    } else {
-      setFormData((prev) => {
-        return {
-          ...prev,
-          role: {
-            role: false,
-          },
-        };
-      });
-    }
+    setFormData((prev) => {
+      return {
+        ...prev,
+        role: selectedValue,
+      };
+    });
   };
 
   return (

@@ -6,7 +6,7 @@ const url = "https://inventoryplusbackend.onrender.com/auth/signUp";
 
 const FormAgregar = (props) => {
   const [visibleForm] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(0);
   const [formData, setFormData] = useState({
     _id: "",
     username: "",
@@ -14,7 +14,7 @@ const FormAgregar = (props) => {
     email: "",
     first_name: "",
     last_name: "",
-    role: { role: Boolean(selectedCategory) }
+    role: selectedCategory,
   });
 
   const handleSubmit = async (e) => {
@@ -42,26 +42,13 @@ const FormAgregar = (props) => {
     const selectedValue = e.target.value;
 
     setSelectedCategory(selectedValue);
-    if (selectedValue === false) {
-      setFormData((prev) => {
-        return {
-          ...prev,
-          role: {
-            role: false
-          }
-        };
-      });
-    } else {
-      setFormData((prev) => {
-        return {
-          ...prev,
-          role: {
-            role: true
-          }
-        };
-      });
-    }
-  }
+    setFormData((prev) => {
+      return {
+        ...prev,
+        role: selectedValue,
+      };
+    });
+  };
 
   return (
     <div className="inset-0 z-20 flex items-start justify-center absolute backdrop-blur-md backdrop-filter h-screen overflow-y-auto">
@@ -150,8 +137,8 @@ const FormAgregar = (props) => {
                 onChange={handleCategoryChange}
                 name="role"
               >
-                <option value={false}>Trabajador</option>
-                <option value={true}>Administrador</option>
+                <option value={0}>Trabajador</option>
+                <option value={1}>Administrador</option>
               </select>
             </div>
           </div>
