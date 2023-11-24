@@ -28,6 +28,9 @@ const Home = () => {
             </h3>
           </div>
         </div>
+        <p className="text-center mt-4 text-lg text-color-cafe-claro md:mb-4">
+          En este apartado podrás ver información general del sistema. Tales como la cantidad de productos, el personal registrado, etc.
+        </p>
         <Chart />
       </div>
     </div>

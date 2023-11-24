@@ -126,6 +126,9 @@ const TablaResponsive = () => {
   return (
     <div className="container-table">
       <h2 className="text-5xl text-color-crema underline mb-4 w-full text-center">Productos</h2>
+      <p className="text-center mt-4 text-lg text-color-crema md:mb-4">
+        En este apartado podrás ver todos los productos registrados en el sistema, además de poder agregar, editar y eliminar productos.
+      </p>
       <div className="dataTable ">
         <div className="search flex justify-between mb-4 p-2">
           <div className=" flex items-center gap-1">
