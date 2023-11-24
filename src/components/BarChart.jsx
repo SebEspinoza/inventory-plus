@@ -21,5 +21,17 @@ const BarChart2 = (props) => {
   );
 };
 
+const BarChart3 = (props) => {
+  return (
+    <Iframe
+      styles={props.style}
+      className={props.classN}
+      src="https://charts.mongodb.com/charts-project-0-sgcwj/embed/charts?id=65611ba0-7ac8-4822-8a36-eaefcb417ffb&maxDataAge=180&theme=light&autoRefresh=true"
+    />
+  );
+}
+
+
 export default BarChart;
 export { BarChart2 };
+export { BarChart3 };

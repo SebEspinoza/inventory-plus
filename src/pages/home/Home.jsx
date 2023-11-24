@@ -1,5 +1,6 @@
 import React from "react";
 import Chart from "./components/Chart";
+import { BarChart3 } from "../../components/BarChart";
 
 const getCurrentDate = () => {
   const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];

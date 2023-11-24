@@ -3,6 +3,7 @@ import Lineas from "../../../assets/Lineas.png";
 import { PieChart2 } from "../../../components/PieChart";
 import WorkersList from "./WorkerList";
 import ProductList from "./productList";
+import { BarChart3 } from "../../../components/BarChart";
 
 const Chart = () => {
   const estilo2 = {
@@ -13,7 +14,7 @@ const Chart = () => {
   return (
     <div className="w-full mt-4 ">
       <div className="grid grid-cols-1 gap-2 overflow-hidden place-items-center lg:flex lg:flex-row lg:flex-wrap lg:justify-around lg:place-items-start">
-        <img src={Lineas} alt="Lineas" />
+        <BarChart3 style={estilo2} classN={classNamePieChart} />
         <PieChart2 style={estilo2} classN={classNamePieChart} />
         <div className="w-full lg:w-2/4">
           <ProductList />
