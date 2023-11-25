@@ -173,12 +173,6 @@ const Sidebar = () => {
                 Estimaciones
               </NavLink>
             </li>
-            <li>
-              <NavLink to={"/"} onClick={handleModalClick} className="link">
-                <FaRegBell onClick={handleModalClick} size={23} className="min-w-max" />
-                Notificaciones
-              </NavLink>
-            </li>
           </ul>
           {/*Segundo */}
           {isOpen && (
