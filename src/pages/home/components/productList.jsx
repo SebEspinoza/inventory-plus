@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ProductCard from "./productCard";
 
 //url API
-const url = "https://inventoryplusbackend.onrender.com/products";
+const url = "https://inventoryplusbackend.cyclic.app/products";
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);

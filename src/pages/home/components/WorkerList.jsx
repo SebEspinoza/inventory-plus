@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 //url API
-const url = "https://inventoryplusbackend.onrender.com/users";
+const url = "https://inventoryplusbackend.cyclic.app/users";
 
 const WorkersList = () => {
   const [workers, setWorkers] = useState([]);

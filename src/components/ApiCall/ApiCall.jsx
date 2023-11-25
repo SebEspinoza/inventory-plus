@@ -1,7 +1,7 @@
 import axios from "axios";
 import { startLogin, successLogin, failedLogin } from "../Actions/Actions";
 
-const url = "https://inventoryplusbackend.onrender.com/auth/login";
+const url = "https://inventoryplusbackend.cyclic.app/auth/login";
 
 export const ApiCall = async (userCredentials, dispatch) => {
   dispatch(startLogin());

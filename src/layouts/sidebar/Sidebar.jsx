@@ -14,6 +14,7 @@ import { BsPerson, BsBoxSeam } from "react-icons/bs";
 import { TbReportAnalytics } from "react-icons/tb";
 import { MdArrowForwardIos } from "react-icons/md";
 import { MdAutoGraph } from "react-icons/md";
+import { FaRegBell } from "react-icons/fa";
 import Logo from "../../assets/Logo.png";
 // Auth
 
@@ -25,6 +26,12 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const go = useNavigate();
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const handleModalClick = () => {
+    setModalIsOpen(true);
+  }
+
   let isTab = useMediaQuery({
     query: "(max-width:768px)",
   });
@@ -33,38 +40,38 @@ const Sidebar = () => {
 
   const Sidebar_animation = isTab
     ? {
-        // Mobile
-        open: {
-          x: 0,
-          width: "16rem",
-          transition: {
-            damping: 40,
-          },
+      // Mobile
+      open: {
+        x: 0,
+        width: "16rem",
+        transition: {
+          damping: 40,
         },
-        closed: {
-          x: -250,
-          width: 0,
-          transition: {
-            damping: 40,
-            delay: 0.15,
-          },
+      },
+      closed: {
+        x: -250,
+        width: 0,
+        transition: {
+          damping: 40,
+          delay: 0.15,
         },
-      }
+      },
+    }
     : {
-        // Desktop
-        open: {
-          width: "16rem",
-          transition: {
-            damping: 40,
-          },
+      // Desktop
+      open: {
+        width: "16rem",
+        transition: {
+          damping: 40,
         },
-        closed: {
-          width: "4rem",
-          transition: {
-            damping: 40,
-          },
+      },
+      closed: {
+        width: "4rem",
+        transition: {
+          damping: 40,
         },
-      };
+      },
+    };
 
   useEffect(() => {
     if (isTab) {
@@ -164,6 +171,12 @@ const Sidebar = () => {
               <NavLink to={"/estimaciones"} className="link">
                 <MdAutoGraph size={23} className="min-w-max" />
                 Estimaciones
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/"} onClick={handleModalClick} className="link">
+                <FaRegBell onClick={handleModalClick} size={23} className="min-w-max" />
+                Notificaciones
               </NavLink>
             </li>
           </ul>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LogCard from "./LogCard";
 
-const url = "https://inventoryplusbackend.onrender.com/";
+const url = "https://inventoryplusbackend.cyclic.app/";
 
 const LogViewer = () => {
   const [logs, setLogs] = useState([]);
@@ -62,9 +62,8 @@ const LogViewer = () => {
               <li
                 key={log._id}
                 onClick={() => handleLogClick(log)}
-                className={`shadow-xl m-2 text-lg pb-2 hover:cursor-pointer rounded-md ${
-                  i % 2 === 0 ? "bg-mocha hover:bg-color-crema" : "bg-color-cafe-claro hover:bg-rojizo text-white"
-                }`}
+                className={`shadow-xl m-2 text-lg pb-2 hover:cursor-pointer rounded-md ${i % 2 === 0 ? "bg-mocha hover:bg-color-crema" : "bg-color-cafe-claro hover:bg-rojizo text-white"
+                  }`}
               >
                 {i + 1}- Historial inventario a las {formatDate(log.timestamp).split(" ")[1] == "20:00" ? "20:00 PM" : "09:00 AM"}
               </li>

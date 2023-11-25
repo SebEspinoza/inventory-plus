@@ -3,7 +3,7 @@ import { RiCloseCircleLine } from "react-icons/ri";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
-const url = "https://inventoryplusbackend.onrender.com/users";
+const url = "https://inventoryplusbackend.cyclic.app/users";
 
 const FormEditar = (props) => {
   const [visibleForm] = useState(false);

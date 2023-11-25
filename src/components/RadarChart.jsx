@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const RadarChart = (props) => {
 
-    const url = "https://inventoryplusbackend.onrender.com/products";
+    const url = "https://inventoryplusbackend.cyclic.app/products";
     const [data, setData] = React.useState([]);
 
     const getData = async () => {
