@@ -10,7 +10,6 @@ import FormAgregar from "../FormAgregar";
 import FormEditar from "../FormEditar";
 
 const url = "https://inventoryplusbackend.cyclic.app/users";
-
 const TablaResponsiveTrabajador = () => {
   const [workers, setWorkers] = useState([]);
   const [visibleForm, setVisibleForm] = useState(false);

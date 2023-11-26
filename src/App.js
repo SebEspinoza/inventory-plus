@@ -7,6 +7,7 @@ import Trabajadores from "./pages/trabajadores/Trabajadores";
 import Unauthorized from "./pages/Unauthorized";
 import Inventario from "./pages/Inventario/Inventario";
 import Login from "./pages/Login";
+import Notifications from "./pages/notifications/notifications";
 import RequiredAuth from "./components/RequiredAuth";
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/inventario" element={<Inventario />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/alertas" element={<Notifications />} />
         </Route>
 
         <Route element={<RequiredAuth allowedRoles={[true]} />}>

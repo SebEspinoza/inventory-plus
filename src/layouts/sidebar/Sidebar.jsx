@@ -14,8 +14,8 @@ import { BsPerson, BsBoxSeam } from "react-icons/bs";
 import { TbReportAnalytics } from "react-icons/tb";
 import { MdArrowForwardIos } from "react-icons/md";
 import { MdAutoGraph } from "react-icons/md";
-import { FaRegBell } from "react-icons/fa";
 import Logo from "../../assets/Logo.png";
+import { MdDoorbell } from "react-icons/md";
 // Auth
 
 const Sidebar = () => {
@@ -25,12 +25,6 @@ const Sidebar = () => {
   // Estado del sidebar
   const [isOpen, setIsOpen] = useState(false);
   const go = useNavigate();
-
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const handleModalClick = () => {
-    setModalIsOpen(true);
-  }
 
   let isTab = useMediaQuery({
     query: "(max-width:768px)",
@@ -171,6 +165,12 @@ const Sidebar = () => {
               <NavLink to={"/estimaciones"} className="link">
                 <MdAutoGraph size={23} className="min-w-max" />
                 Estimaciones
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/alertas"} className="link">
+                <MdDoorbell size={23} className="min-w-max" />
+                Notificaciones
               </NavLink>
             </li>
           </ul>

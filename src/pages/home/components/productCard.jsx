@@ -11,7 +11,7 @@ const ProductCard = ({ name, description, last_name, img }) => {
       )}
       <div className="ml-10">
         <div className="font-bold">
-          {name} {last_name}
+          {name}
         </div>
         <div className="text-black text-md">{description}</div>
       </div>

@@ -5,6 +5,7 @@ import ColumnChart from "../../components/ColumnChart.jsx";
 import { BarChart2 } from "../../components/BarChart.jsx";
 import RadarChart from "../../components/RadarChart.jsx";
 
+
 const Dashboard = () => {
   const estilo1 = {
     background: "#ffffff",
