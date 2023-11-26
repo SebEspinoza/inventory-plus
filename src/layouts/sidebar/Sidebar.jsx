@@ -170,7 +170,7 @@ const Sidebar = () => {
             <li>
               <NavLink to={"/alertas"} className="link">
                 <MdDoorbell size={23} className="min-w-max" />
-                Notificaciones
+                Alertas
               </NavLink>
             </li>
           </ul>

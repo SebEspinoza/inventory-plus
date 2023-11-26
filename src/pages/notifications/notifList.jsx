@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import NotifCard from "./notifcard";
+import ProductCard from "../home/components/productCard";
+
 
 //url API
 const url = "https://inventoryplusbackend.cyclic.app/products";
@@ -27,10 +29,10 @@ const NotifList = () => {
 
 
     return (
-        <div className="container mx-auto p-6 ms-0 me-0 bg-white shadow-lg rounded-md h-full lg:h-[660px] lg:overflow-y-hidden">
-            <div className="grid grid-cols-3 place-items-center overflow-y-auto">
+        <div className="container mx-auto p-6 bg-white shadow-lg rounded-md h-full lg:h-[660px] overflow-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto">
                 {products.map((prod) => (
-                    <NotifCard
+                    <ProductCard
                         key={prod._id}
                         name={prod.name}
                         description={[prod.category, <br />, prod.quantity + " unidades de stock", <br />, "$" + prod.price]}
