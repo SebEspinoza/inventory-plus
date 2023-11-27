@@ -72,7 +72,7 @@ const Sidebar = () => {
       // Mobile
       setIsOpen(false);
     } else {
-      setIsOpen(false);
+      setIsOpen(true);
     }
   }, [isTab]);
 
