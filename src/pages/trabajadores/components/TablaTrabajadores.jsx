@@ -194,10 +194,7 @@ const TablaTrabajadores = () => {
 
   return (
     <div className="mb-4">
-      <div className="flex justify-center mb-10">
-        <h1 className="text-5xl underline text-color-crema">Trabajadores</h1>
-      </div>
-      <p className="text-center mt-4 text-lg text-color-crema md:mb-4">
+      <p className="text-center mt-4 text-sm text-color-crema md:mb-4">
         En este apartado podrás ver todos los trabajadores registrados, además de poder agregar, editar y eliminar trabajadores.
       </p>
       <div className="p-2 mx-auto  text-color-crema bg-color-cafe-claro rounded-lg shadow-neumorphicTable">

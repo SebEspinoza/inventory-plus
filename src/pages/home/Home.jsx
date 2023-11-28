@@ -22,15 +22,12 @@ const Home = () => {
       <div className="flex-grow md:p-4 p-1">
         <div className="parteSuperior flex lg:flex-row flex-col items-center justify-between mt-5">
           <div className="textoSuperior flex lg:flex-row  flex-col items-center">
-            <h1 className="font-OpenSans font-bold lg:text-[32px] lg:leading-[48px] text-[32px] leading-[30px] text-center text-color-cafe-oscuro">
-              Vista General
-            </h1>
             <h3 className="font-Manrope lg:ml-[15px] font-normal lg:text-[14px] lg:leading-[22px] text-sm opacity-1 text-color-cafe-claro">
               Hoy: {todayDate}
             </h3>
           </div>
         </div>
-        <p className="text-center mt-4 text-lg text-color-cafe-claro md:mb-4">
+        <p className="text-center mt-4 text-sm text-color-cafe-claro md:mb-4">
           En este apartado podrás ver información general del sistema. Tales como la cantidad de productos, el personal registrado, etc.
         </p>
         <Chart />

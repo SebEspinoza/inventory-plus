@@ -132,7 +132,6 @@ const TablaResponsiveTrabajador = () => {
 
   return (
     <div className="container-table">
-      <h2 className="text-5xl text-color-crema underline mb-4 w-full text-center">Trabajadores</h2>
       <p className="text-center mt-4 text-lg text-color-crema md:mb-4">
         En este apartado podrás ver todos los trabajadores registrados, además de poder agregar, editar y eliminar trabajadores.
       </p>

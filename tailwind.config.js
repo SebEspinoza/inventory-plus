@@ -252,6 +252,7 @@ module.exports = {
         neumorphicTable: "6px 6px 12px #201000,-6px -6px 12px #824000",
         neumorphicLogOutButton: "inset -1px -1px 10px #59181a,inset 5px 5px 10px #ff5e66",
         neumorphicTr: "7px 7px 21px #391c00,-7px -7px 21px #693400",
+        navbarShadow: "3px 3px 6px #201000,-3px -3px 6px #824000",
       },
     },
   },
