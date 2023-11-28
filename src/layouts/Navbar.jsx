@@ -17,6 +17,8 @@ const Navbar = () => {
         return 'Panel de información';
       case '/estimaciones':
         return 'Estimaciones';
+      case '/alertas':
+        return 'Alertas';
       default:
         return 'Page Title';
     }
