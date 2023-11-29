@@ -66,104 +66,106 @@ const FormEditar = (props) => {
   };
 
   return (
-    <div className="inset-0 z-20 flex items-start justify-center absolute backdrop-blur-md backdrop-filter h-screen overflow-y-auto">
-      <section className="max-w-4xl p-6 mx-auto rounded-md shadow-md dark:bg-color-cafe-oscuro mt-4 ">
-        <div className="close-btn flex justify-end items-center rounded-[20px] cursor-pointer text-danger-600">
-          <RiCloseCircleLine onClick={buttonHandler} size={25} />
-        </div>
-        <h1 className="text-xl font-bold text-white capitalize dark:text-white">Editar trabajador</h1>
-        <form onSubmit={handleEdit}>
-          <div className="grid grid-cols-1 gap-6 mt-8 sm:grid-cols-2">
-            <div>
-              <label className="text-white dark:text-gray-200" htmlFor="username">
-                Nombre de usuario :
-              </label>
-              <input
-                id="username"
-                name="username"
-                type="text"
-                className="block w-full px-4 py-2 mt-2 bg-white text-black border rounded-md focus:outline-none focus:ring"
-                onChange={handleChange}
-                placeholder={formData.username}
-              />
+    <div className="fixed inset-0 z-20 flex items-start justify-center backdrop-blur-md backdrop-filter overflow-y-auto">
+      <div className="mt-20">
+        <section className="max-w-4xl p-6 mx-auto rounded-md shadow-md dark:bg-color-cafe-oscuro mt-4 ">
+          <div className="close-btn flex justify-end items-center rounded-[20px] cursor-pointer text-danger-600">
+            <RiCloseCircleLine onClick={buttonHandler} size={25} />
+          </div>
+          <h1 className="text-xl font-bold text-white capitalize dark:text-white">Editar trabajador</h1>
+          <form onSubmit={handleEdit}>
+            <div className="grid grid-cols-1 gap-6 mt-8 sm:grid-cols-2">
+              <div>
+                <label className="text-white dark:text-gray-200" htmlFor="username">
+                  Nombre de usuario :
+                </label>
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  className="block w-full px-4 py-2 mt-2 bg-white text-black border rounded-md focus:outline-none focus:ring"
+                  onChange={handleChange}
+                  placeholder={formData.username}
+                />
+              </div>
+
+              <div>
+                <label className="text-white" htmlFor="email">
+                  Email :
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  className="block w-full px-4 py-2 mt-2 bg-white border rounded-md focus:outline-none focus:ring text-black"
+                  onChange={handleChange}
+                  placeholder={formData.email}
+                />
+              </div>
+
+              <div>
+                <label className="text-white" htmlFor="first_name">
+                  Nombre :
+                </label>
+                <input
+                  id="first_name"
+                  type="text"
+                  name="first_name"
+                  className="block w-full px-4 py-2 mt-2 bg-white border  rounded-md focus:outline-none focus:ring text-black"
+                  onChange={handleChange}
+                  placeholder={formData.first_name}
+                />
+              </div>
+
+              <div>
+                <label className="text-white" htmlFor="last_name">
+                  Apellido :
+                </label>
+                <input
+                  id="last_name"
+                  type="text"
+                  name="last_name"
+                  className="block w-full px-4 py-2 mt-2 bg-white border  rounded-md focus:outline-none focus:ring text-black"
+                  onChange={handleChange}
+                  placeholder={formData.last_name}
+                />
+              </div>
+
+              <div>
+                <label className="text-white dark:text-gray-200" htmlFor="role">
+                  Rol :
+                </label>
+                <select
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white rounded-md  focus:outline-none focus:ring text-black"
+                  value={selectedCategory}
+                  onChange={handleCategoryChange}
+                  name="role"
+                >
+                  <option value="true">Administrador</option>
+                  <option value="false">Trabajador</option>
+                </select>
+              </div>
             </div>
 
-            <div>
-              <label className="text-white" htmlFor="email">
-                Email :
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                className="block w-full px-4 py-2 mt-2 bg-white border rounded-md focus:outline-none focus:ring text-black"
-                onChange={handleChange}
-                placeholder={formData.email}
-              />
-            </div>
-
-            <div>
-              <label className="text-white" htmlFor="first_name">
-                Nombre :
-              </label>
-              <input
-                id="first_name"
-                type="text"
-                name="first_name"
-                className="block w-full px-4 py-2 mt-2 bg-white border  rounded-md focus:outline-none focus:ring text-black"
-                onChange={handleChange}
-                placeholder={formData.first_name}
-              />
-            </div>
-
-            <div>
-              <label className="text-white" htmlFor="last_name">
-                Apellido :
-              </label>
-              <input
-                id="last_name"
-                type="text"
-                name="last_name"
-                className="block w-full px-4 py-2 mt-2 bg-white border  rounded-md focus:outline-none focus:ring text-black"
-                onChange={handleChange}
-                placeholder={formData.last_name}
-              />
-            </div>
-
-            <div>
-              <label className="text-white dark:text-gray-200" htmlFor="role">
-                Rol :
-              </label>
-              <select
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white rounded-md  focus:outline-none focus:ring text-black"
-                value={selectedCategory}
-                onChange={handleCategoryChange}
-                name="role"
+            <div className="flex justify-between mt-6">
+              <button
+                className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-success rounded-md 
+              hover:bg-pink-700 focus:outline-none focus:bg-success-850"
               >
-                <option value="true">Administrador</option>
-                <option value="false">Trabajador</option>
-              </select>
+                Guardar
+              </button>
+              <button
+                className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-danger rounded-md 
+              hover:bg-pink-700 focus:outline-none focus:bg-danger-850"
+                onClick={buttonHandler}
+              >
+                Cancelar
+              </button>
             </div>
-          </div>
-
-          <div className="flex justify-between mt-6">
-            <button
-              className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-success rounded-md 
-            hover:bg-pink-700 focus:outline-none focus:bg-success-850"
-            >
-              Guardar
-            </button>
-            <button
-              className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-danger rounded-md 
-            hover:bg-pink-700 focus:outline-none focus:bg-danger-850"
-              onClick={buttonHandler}
-            >
-              Cancelar
-            </button>
-          </div>
-        </form>
-      </section>
-      <ToastContainer />
+          </form>
+        </section>
+        <ToastContainer />
+      </div>
     </div>
   );
 };
