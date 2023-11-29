@@ -39,6 +39,8 @@ const TablaProductos = () => {
   const [globalFilter, setGlobalFilter] = useState("");
   const fechaActual = new Date();
 
+  const stockBajo = 10;
+
   const getProducts = async () => {
     try {
       const respuesta = await axios.get(url);
@@ -243,7 +245,15 @@ const TablaProductos = () => {
             <tbody>
               {table.getRowModel().rows.length ? (
                 table.getRowModel().rows.map((row, i) => (
-                  <tr key={row.id} className={`${i % 2 === 0 ? "bg-mocha" : "bg-color-cafe-claro-600"}`}>
+                  <tr
+                    key={row.id}
+                    className={`${row.getValue("quantity") < stockBajo
+                      ? "bg-rojizo text-white"
+                      : i % 2 === 0
+                        ? "bg-mocha"
+                        : "bg-color-cafe-claro-600"
+                      }`}
+                  >
                     {row.getVisibleCells().map((cell) => (
                       <td key={cell.id} className="pl-3 py-2">
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
