@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import axios from "axios";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
-import "../../../../styles/dataTable.css";
 import { ToastContainer, toast } from "react-toastify";
 import { IoIosAddCircle } from "react-icons/io";
 import FormAgregar from "../FormAgregar";
 import FormEditar from "../FormEditar";
+import "../../../../styles/dataTable.css";
 
 const url = "https://inventoryplusbackend.cyclic.app/products";
 
@@ -128,7 +127,7 @@ const TablaResponsive = () => {
       <p className="text-center mt-4 text-lg text-color-crema md:mb-4">
         En este apartado podrás ver todos los productos registrados en el sistema, además de poder agregar, editar y eliminar productos.
       </p>
-      <div className="dataTable ">
+      <div className="dataTable">
         <div className="search flex justify-between mb-4 p-2">
           <div className=" flex items-center gap-1">
             <input
@@ -151,7 +150,12 @@ const TablaResponsive = () => {
               </tr>
             ) : (
               filteredProducts.map((product, i) => (
-                <tr key={product._id} className="text-center text-md text-color-crema bg-color-cafe-claro shadow-neumorphicTr mb-6 rounded-md">
+                <tr
+                  key={product._id}
+                  className={`text-center text-md text-color-crema shadow-neumorphicTr mb-6 rounded-md ${
+                    product.quantity < 10 ? "bg-rojizo text-white" : i % 2 === 0 ? "bg-mocha" : "bg-color-cafe-claro-600"
+                  }`}
+                >
                   <td data-label={"#"}>{i + 1}</td>
                   <td data-label={"Nombre:"}>{product.name}</td>
                   <td data-label={"Cantidad:"}>{product.quantity}</td>
