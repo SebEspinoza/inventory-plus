@@ -122,7 +122,7 @@ const Sidebar = () => {
         //initial={{ x: isTab ? -250 : 0 }}
         animate={isOpen ? "open" : "closed"}
         className="bg-color-crema text-gray shadow-neumorphicBar rounded-tr-lg rounded-br-lg z-[999]
-         w-[16rem] max-w-[16rem] h-screen overflow-hidden md:relative fixed"
+         w-[16rem] max-w-[16rem] h-screen overflow-hidden md:relative fixed left-0 top-0"
       >
         {/*Logo */}
         <div className="flex items-center gap-3 font-medium border-b border-slate-300 py-3 mx-3">

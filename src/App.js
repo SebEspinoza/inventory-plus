@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/home/Home";
-import Estimaciones from "./pages/Estimaciones";
+import Estimaciones from "./pages/predictions/Estimaciones";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Trabajadores from "./pages/trabajadores/Trabajadores";
 import Unauthorized from "./pages/Unauthorized";
