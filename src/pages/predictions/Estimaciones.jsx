@@ -9,9 +9,9 @@ const Estimaciones = () => {
         <p className="text-center mt-4 text-sm text-color-cafe-claro md:mb-4">
           En este apartado podrás ocupar el modelo de predicción de stock, para poder predecir el stock necesario dentro de un mes
         </p>
-        <Iframe src="https://knn-weatheraus.onrender.com/" height="400px" width="100%" scrolling="no" />
+        <Iframe src="https://knn-weatheraus.onrender.com/" height="600px" width="100%" scrolling="no" />
       </div>
-      <div className="md:w-1/2">
+      <div className="w-full md:w-1/2">
         <EstiList />
       </div>
     </div>
