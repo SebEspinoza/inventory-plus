@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background: #fff0c9;
+  }
+  h1 {
+    @apply text-xl font-medium capitalize;
+  }
+}
+
+.link {
+  @apply p-2.5 flex rounded-md gap-6 items-center md:cursor-pointer cursor-default duration-300 font-medium;
+}
+
+.active {
+  @apply bg-rojizo text-color-crema shadow-neumorphicActiveButton;
+}
+
+.download-btn {
+  @apply bg-rojizo hover:bg-color-crema hover:text-color-cafe-oscuro fill-color-crema hover:fill-rojizo px-4 py-2 
+  flex text-color-crema items-center gap-2 rounded;
+}
