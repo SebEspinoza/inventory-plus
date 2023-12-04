@@ -16,7 +16,6 @@ import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import Log from "../components/Log";
 
-
 //url API
 const url = "https://inventoryplusbackend.cyclic.app/products";
 
@@ -208,6 +207,20 @@ const TablaProductos = () => {
         <p className="text-center mt-4 text-lm text-color-crema md:mb-4">
           En este apartado podrás ver todos los productos registrados en el sistema, además de poder agregar, editar y eliminar productos.
         </p>
+
+        <div className="mb-4 sm:mb-0">
+          <div className="flex flex-row items-center sm:gap-4 mb-4 justify-center">
+            <div className="flex items-center mb-2 sm:mb-0">
+              <div className="w-6 h-6 rounded-full bg-success-800 mr-2 border border-white"></div>
+              <div className="text-sm text-gray-700 text-color-1-100">Producto Vencido</div>
+            </div>
+            <div className="flex items-center">
+              <div className="w-6 h-6 rounded-full bg-rojizo mr-2 border border-white"></div>
+              <div className="text-sm text-gray-700 text-color-1-100">Stock Bajo</div>
+            </div>
+          </div>
+        </div>
+
         <div className="p-2 mx-auto  text-color-crema bg-color-cafe-claro rounded-lg shadow-neumorphicTable">
           {/*Botones superiores*/}
           <div className="flex  justify-between mb-4 p-2">
@@ -247,12 +260,15 @@ const TablaProductos = () => {
                 table.getRowModel().rows.map((row, i) => (
                   <tr
                     key={row.id}
-                    className={`${row.getValue("quantity") < stockBajo
-                      ? "bg-rojizo text-white"
-                      : i % 2 === 0
-                        ? "bg-mocha"
-                        : "bg-color-cafe-claro-600"
-                      }`}
+                    className={`border-color-cafe-claro border ${
+                      row.getValue("quantity") < stockBajo
+                        ? "bg-rojizo text-white "
+                        : row.getValue("category") !== "Insumos" &&
+                          row.getValue("date_of_expiry") &&
+                          new Date(row.getValue("date_of_expiry")) < fechaActual
+                        ? "bg-success-800 text-white  "
+                        : "bg-mocha  "
+                    }`}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <td key={cell.id} className="pl-3 py-2">

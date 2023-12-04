@@ -14,7 +14,7 @@ const EstiList = () => {
       const allProducts = respuesta.data;
       setProducts(allProducts);
     } catch (error) {
-      console.error("Error al obtener los trabajadores:", error);
+      console.error("Error al obtener los productos:", error);
     }
   };
 

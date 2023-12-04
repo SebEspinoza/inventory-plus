@@ -15,6 +15,7 @@ const TablaResponsive = () => {
   const [visibleForm, setVisibleForm] = useState(false);
   const [visibleEdit, setVisibleEdit] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const fechaActual = new Date();
   const [formDataEdit, setFormDataEdit] = useState({
     _id: "",
     name: "",
@@ -95,6 +96,17 @@ const TablaResponsive = () => {
     }
   };
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 5;
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const handlePageChange = (index) => {
+    setCurrentPage(index);
+  };
+
   // Toast
   const deleteSucces = () => {
     toast.error("Producto Eliminado", {
@@ -127,6 +139,20 @@ const TablaResponsive = () => {
       <p className="text-center mt-4 text-lg text-color-crema md:mb-4">
         En este apartado podrás ver todos los productos registrados en el sistema, además de poder agregar, editar y eliminar productos.
       </p>
+
+      <div className="mt-4">
+        <div className="flex flex-col items-center sm:gap-4 mb-4">
+          <div className="flex items-center mb-2 sm:mb-0">
+            <div className="w-6 h-6 rounded-full bg-success-800 mr-2 border border-white"></div>
+            <div className="text-sm text-gray-700 text-color-1-100">Producto Vencido</div>
+          </div>
+          <div className="flex items-center">
+            <div className="w-6 h-6 rounded-full bg-rojizo mr-2 border border-white"></div>
+            <div className="text-sm text-gray-700 text-color-1-100">Stock Bajo</div>
+          </div>
+        </div>
+      </div>
+
       <div className="dataTable">
         <div className="search flex justify-between mb-4 p-2">
           <div className=" flex items-center gap-1">
@@ -142,18 +168,22 @@ const TablaResponsive = () => {
         <table className="bg-none">
           <thead></thead>
           <tbody className="bg-transparent">
-            {filteredProducts.length === 0 ? (
+            {currentProducts.length === 0 ? (
               <tr>
                 <td colSpan="7" className="text-center text-md text-color-crema bg-color-cafe-claro shadow-neumorphicTr mb-6 rounded-md">
                   No existen productos o producto no encontrado.
                 </td>
               </tr>
             ) : (
-              filteredProducts.map((product, i) => (
+              currentProducts.map((product, i) => (
                 <tr
                   key={product._id}
                   className={`text-center text-md text-color-crema shadow-neumorphicTr mb-6 rounded-md ${
-                    product.quantity < 10 ? "bg-rojizo text-white" : i % 2 === 0 ? "bg-mocha" : "bg-color-cafe-claro-600"
+                    product.quantity < 10
+                      ? "bg-rojizo text-white border border-color-cafe-claro"
+                      : product.category !== "Insumos" && product.date_of_expiry && new Date(product.date_of_expiry) < fechaActual
+                      ? "bg-success-800 text-white border border-color-cafe-claro"
+                      : "bg-mocha border border-color-cafe-claro"
                   }`}
                 >
                   <td data-label={"#"}>{i + 1}</td>
@@ -196,12 +226,28 @@ const TablaResponsive = () => {
             )}
           </tbody>
         </table>
+        <div className="mt-4 w-full flex flex-row items-center justify-center gap-2 z-20">
+          {Array.from({ length: Math.ceil(filteredProducts.length / productsPerPage) }, (_, index) => (
+            <button
+              key={index}
+              onClick={(e) => {
+                e.preventDefault();
+                handlePageChange(index + 1);
+              }}
+              className={`px-3 py-1 border rounded-md ${
+                currentPage === index + 1 ? "bg-color-crema text-color-cafe-oscuro" : "bg-color-cafe-claro text-color-crema"
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
       </div>
       {/* Form Agregar */}
       {visibleForm && <FormAgregar onClose={() => toggleSeccion(1)} onProductoAgregado={handleProductoAgregado} />}
       {/* Form Editar */}
       {visibleEdit && <FormEditar onClose={() => toggleSeccion(2)} onProductoEditado={handleProductoEditado} rest={formDataEdit} />}
-      <div className="md:hidden w-full right-0 bottom-0 z-10 sticky flex justify-end pb-4 mx-0">
+      <div className="md:hidden w-full flex justify-end pb-4 mx-0 add sticky right-0 bottom-0">
         <button className="rounded-full text-color-crema" onClick={() => toggleSeccion(1)}>
           <IoIosAddCircle size={50} />
         </button>
