@@ -204,7 +204,7 @@ const TablaProductos = () => {
   return (
     <>
       <div className="mb-4">
-        <p className="text-center mt-4 text-lm text-color-crema md:mb-4">
+        <p className="text-center mt-4 text-sm md:text-lg text-color-crema md:mb-4">
           En este apartado podrás ver todos los productos registrados en el sistema, además de poder agregar, editar y eliminar productos.
         </p>
 
