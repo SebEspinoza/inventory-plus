@@ -41,7 +41,7 @@ const FormEditar = (props) => {
   };
 
   const editToast = () => {
-    toast.warn("Producto editado!", {
+    toast.warn("Trabajador editado!", {
       position: "top-right",
       autoClose: 1000,
       hideProgressBar: false,
