@@ -154,6 +154,7 @@ const TablaProductos = () => {
   const handleProductoAgregado = () => {
     getProducts();
     toggleSeccion(1);
+    addToast();
   };
 
   const handleProductoEditado = (product) => {
@@ -165,6 +166,19 @@ const TablaProductos = () => {
   // Toast
   const deleteSucces = () => {
     toast.error("Producto Eliminado", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  const addToast = () => {
+    toast.success("Producto agregado!", {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -218,6 +232,10 @@ const TablaProductos = () => {
               <div className="w-6 h-6 rounded-full bg-rojizo mr-2 border border-white"></div>
               <div className="text-sm text-gray-700 text-color-1-100">Stock Bajo</div>
             </div>
+            <div className="flex items-center">
+              <div className="w-6 h-6 rounded-full bg-secondary-750 mr-2 border border-white"></div>
+              <div className="text-sm text-gray-700 text-color-1-100">Stock Bajo y Producto Vencido</div>
+            </div>
           </div>
         </div>
 
@@ -260,15 +278,18 @@ const TablaProductos = () => {
                 table.getRowModel().rows.map((row, i) => (
                   <tr
                     key={row.id}
-                    className={`border-color-cafe-claro border ${
-                      row.getValue("quantity") < stockBajo
-                        ? "bg-rojizo text-white "
+                    className={`border-color-cafe-claro border ${row.getValue("quantity") < stockBajo &&
+                      row.getValue("date_of_expiry") &&
+                      new Date(row.getValue("date_of_expiry")) < fechaActual
+                      ? "bg-secondary-750 text-white"
+                      : row.getValue("quantity") < stockBajo
+                        ? "bg-rojizo text-white"
                         : row.getValue("category") !== "Insumos" &&
                           row.getValue("date_of_expiry") &&
                           new Date(row.getValue("date_of_expiry")) < fechaActual
-                        ? "bg-success-800 text-white  "
-                        : "bg-mocha  "
-                    }`}
+                          ? "bg-success-800 text-white"
+                          : "bg-mocha"
+                      }`}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <td key={cell.id} className="pl-3 py-2">
