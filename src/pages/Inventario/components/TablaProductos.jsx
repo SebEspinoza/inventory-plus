@@ -88,7 +88,7 @@ const TablaProductos = () => {
     }),
     columnHelper.accessor("category", {
       cell: (info) => <span>{info.getValue()}</span>,
-      header: "Categoria",
+      header: "Categoría",
     }),
     columnHelper.accessor("date_of_expiry", {
       cell: (info) => {

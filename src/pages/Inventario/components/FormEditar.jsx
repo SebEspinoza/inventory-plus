@@ -159,7 +159,7 @@ const FormEditar = (props) => {
               </div>
               <div>
                 <label className="text-white dark:text-gray-200" htmlFor="category">
-                  Categoria :
+                  Categoría :
                 </label>
                 <select
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white rounded-md  focus:outline-none focus:ring text-black"

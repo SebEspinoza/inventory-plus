@@ -178,19 +178,18 @@ const TablaResponsive = () => {
               currentProducts.map((product, i) => (
                 <tr
                   key={product._id}
-                  className={`text-center text-md text-color-crema shadow-neumorphicTr mb-6 rounded-md ${
-                    product.quantity < 10
+                  className={`text-center text-md text-color-crema shadow-neumorphicTr mb-6 rounded-md ${product.quantity < 10
                       ? "bg-rojizo text-white border border-color-cafe-claro"
                       : product.category !== "Insumos" && product.date_of_expiry && new Date(product.date_of_expiry) < fechaActual
-                      ? "bg-success-800 text-white border border-color-cafe-claro"
-                      : "bg-mocha border border-color-cafe-claro"
-                  }`}
+                        ? "bg-success-800 text-white border border-color-cafe-claro"
+                        : "bg-mocha border border-color-cafe-claro"
+                    }`}
                 >
                   <td data-label={"#"}>{i + 1}</td>
                   <td data-label={"Nombre:"}>{product.name}</td>
                   <td data-label={"Cantidad:"}>{product.quantity}</td>
                   <td data-label={"Precio:"}>${new Intl.NumberFormat("es-cl").format(product.price)}</td>
-                  <td data-label={"Categoria:"}>{product.category}</td>
+                  <td data-label={"Categoría:"}>{product.category}</td>
                   {product.category === "Alimento" ? (
                     <td data-label={"Fecha vencimiento:"}>{product.date_of_expiry.toString().split("T")[0]}</td>
                   ) : null}
@@ -234,9 +233,8 @@ const TablaResponsive = () => {
                 e.preventDefault();
                 handlePageChange(index + 1);
               }}
-              className={`px-3 py-1 border rounded-md ${
-                currentPage === index + 1 ? "bg-color-crema text-color-cafe-oscuro" : "bg-color-cafe-claro text-color-crema"
-              }`}
+              className={`px-3 py-1 border rounded-md ${currentPage === index + 1 ? "bg-color-crema text-color-cafe-oscuro" : "bg-color-cafe-claro text-color-crema"
+                }`}
             >
               {index + 1}
             </button>
